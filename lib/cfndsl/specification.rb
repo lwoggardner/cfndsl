@@ -70,11 +70,11 @@ module CfnDsl
             # Tag is a reused type, but not quite primitive
             # and not all resources use the general form
             nested_prop_type =
-                if nested_prop_info['ItemType'] == 'Tag'
-                  ['Tag']
-                else
-                  Array(root_resource_name + nested_prop_info['ItemType'])
-                end
+              if nested_prop_info['ItemType'] == 'Tag'
+                ['Tag']
+              else
+                Array(root_resource_name + nested_prop_info['ItemType'])
+              end
 
           elsif nested_prop_info['Type']
             nested_prop_type = root_resource_name + nested_prop_info['Type']

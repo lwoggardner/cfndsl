@@ -117,7 +117,7 @@ module CfnDsl
                       value = klass.new
                       existing.push(fn_if ? FnIf(fn_if, value, Ref('AWS::NoValue')) : value)
                       # This line never worked before, the useful thing to do is pass the array value to the block
-                      value.instance_exec(array_params_value,&block)
+                      value.instance_exec(array_params_value, &block)
                     end
                   else
                     # List of parameters with no block -
