@@ -6,3 +6,5 @@ coverage/
 *.swp
 *.swo
 .idea/
+vendor
+.bundle
