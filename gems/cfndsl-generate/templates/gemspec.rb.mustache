@@ -1,0 +1,20 @@
+{{> generated.rb}}
+
+Gem::Specification.new do |s|
+  s.version     = '{{version}}'
+  s.metadata['cfndsl_spec_digest'] = '{{rb_digest}}'
+  s.metadata['cfndsl_resource_digest'] = '{{resource_digest}}'
+  s.metadata['cfndsl_generate_version'] = '{{cfndsl_generate_version}}'
+  s.metadata['cfndls_version'] = '{{cfndsl_version}}'
+  s.files       =  Dir['lib/**/*.rb'] # Generated
+  s.license       = 'MIT'
+  s.add_runtime_dependency 'cfndsl', '{{cfndsl_requirement}}'
+
+  # Attributes below will be retained when regenerating
+  s.name        = '{{spec.name}}'
+  s.summary     = '{{spec.summary}}'
+  s.description = '{{spec.description}}'
+  s.authors     = {{{spec.authors}}}
+  s.email       = {{{spec.email}}}
+  s.homepage    = '{{spec.homepage}}'
+end

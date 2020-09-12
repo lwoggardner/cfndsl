@@ -40,7 +40,7 @@ describe CfnDsl::CloudFormationTemplate do
     end
 
     # Previous behaviour produces valid result, but appends rather than replaces (inconsistent with top level item)
-    it 'appends entries when plural form is used' do
+    it 'replaces entries when plural form is used' do
       template.DirectoryService_SimpleAD(:Test) do
         VpcSettings do
           SubnetId 'subnet-x'

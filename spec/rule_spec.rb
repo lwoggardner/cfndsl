@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 describe CfnDsl::OutputDefinition do
-  let(:template) { CfnDsl::OrchestrationTemplate.new }
+  let(:template) { CfnDsl::ServiceCatalogTemplate.new }
   let(:target) { File.read("#{File.dirname(__FILE__)}/fixtures/rule-assertion.json") }
   context '#Assert' do
     it 'formats correctly' do

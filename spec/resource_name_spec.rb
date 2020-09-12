@@ -11,11 +11,11 @@ describe 'cfndsl', type: :aruba do
       end
     TEMPLATE
   end
-  before(:each) { write_file('template.rb', template_content) }
+  before(:each) { write_file('cloudformation_template.rb', template_content) }
   context 'cfndsl FILE' do
     it 'errors because the name is invalid' do
-      run_command 'cfndsl template.rb'
-      expect(last_command_started).to have_output_on_stderr('Resource name: my_instance is invalid')
+      run_command 'cfndsl cloudformation_template.rb'
+      expect(last_command_started).to have_output_on_stderr(/Resource name: my_instance is invalid logical id/)
     end
   end
 end

@@ -1,0 +1,6 @@
+# frozen_string_literal: true
+
+require 'cfndsl/generate/rake'
+require 'rake/clean'
+CLOBBER.add('lib/cfndsl')
+CfnDsl::Generate.default_zip = 'https://schema.cloudformation.us-east-1.amazonaws.com/CloudformationSchema.zip'

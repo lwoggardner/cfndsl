@@ -1,0 +1,32 @@
+{{> generated.rb}}
+
+require 'cfndsl/cloudformation_template'
+require 'cfndsl/types'
+
+module CfnDsl
+  module {{organization}}
+    module {{service}}{{#description}}
+      # {{{.}}}{{/description}}{{#source_url}}
+      # @see {{.}}{{/source_url}}
+      class {{resource}} < ResourceType{{#classes}}{{#description}}
+      # {{{.}}}{{/description}}{{#source_url}}
+      # @see {{.}}{{/source_url}}
+      class {{ruby_type}} < PropertyType
+{{> properties.rb}}
+        end{{/classes}}
+{{> properties.rb}}
+      end
+    end
+  end
+
+  # rubocop:disable Style/Documentation
+  class CloudFormationTemplate
+    # @return [{{organization}}::{{service}}::{{resource}}]
+    def {{organization}}_{{service}}_{{resource}}(logical_id,value=nil,&block)
+      Resource(logical_id,value, attr_class: {{organization}}::{{service}}::{{resource}},&block)
+    end
+  end
+  # rubocop:enable Style/Documentation
+end
+
+

@@ -2,8 +2,12 @@
 
 require 'spec_helper'
 
+# Hack to ensure order of instance variables is unique for this test.
+class ConditionSpecTemplate < CfnDsl::CloudFormationTemplate
+end
+
 describe CfnDsl::ConditionDefinition do
-  let(:template) { CfnDsl::OrchestrationTemplate.new }
+  let(:template) { ConditionSpecTemplate.new }
   let(:target) { File.read("#{File.dirname(__FILE__)}/fixtures/condition-assertion.json") }
 
   context '#Condition' do

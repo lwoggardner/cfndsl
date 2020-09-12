@@ -50,7 +50,7 @@ describe CfnDsl::CloudFormationTemplate do
   end
 
   it 'detects a self reference in a Resource' do
-    q = subject.Resource('q') { Property('p', SomeDeepPropery: ['x', Ref('q')]) }
+    q = subject.Resource('q') { Property('p', SomeDeepProperty: ['x', Ref('q')]) }
     q_refs = q.build_references
     expect(q_refs).to include('q')
     messages = subject.check_refs
@@ -137,7 +137,7 @@ describe CfnDsl::CloudFormationTemplate do
         id = ImageId 'aaaaa'
         SecurityGroup 'one'
         SecurityGroup 'two'
-        groups = @Properties['SecurityGroups'].value
+        groups = @Properties['SecurityGroups']
         spec.expect(id).to spec.eq('aaaaa')
         spec.expect(groups).to spec.eq(%w[one two])
       end
@@ -147,15 +147,15 @@ describe CfnDsl::CloudFormationTemplate do
   it 'singularizes indirectly' do
     user = subject.IAM_User 'TestUser'
     policy = user.Policy 'stuff'
-    expect(policy).to eq('stuff')
+    expect(policy).to eq(['stuff'])
 
     result2 = user.Policy do
       PolicyName 'stuff'
       PolicyDocument(a: 7)
     end
 
-    expect(result2).to be_a(CfnDsl::AWS::Types::AWSIAMUserPolicy)
-    expect(user.instance_variable_get('@Properties')['Policies'].value.length).to eq(2)
+    expect(result2.last).to be_a(CfnDsl::AWS::IAM::User::Policy)
+    expect(user.instance_variable_get('@Properties')['Policies'].length).to eq(2)
   end
 
   it 'handles pseudo parameters' do
@@ -182,7 +182,7 @@ describe CfnDsl::CloudFormationTemplate do
       EC2_Instance('myserver') do
         InstanceType 'foo'
         InstanceType 'bar'
-        f = @Properties['InstanceType'].value
+        f = @Properties['InstanceType']
         spec.expect(f).to spec.eq('bar')
       end
     end

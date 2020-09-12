@@ -1,0 +1,33 @@
+{{#properties}}
+{{^list_type?}}
+  #   @param [{{ruby_type}}|JSONable] value{{#description}}
+  #     {{{.}}}{{/description}}
+{{#object_type?}}
+  # @@overload {{property_name}}(&block)
+  #   Set :{{property_name}} from block via instance eval of a new {{ruby_type}}
+{{/object_type?}}
+  def {{property_name}}(value{{#object_type?}}=nil,**value_hash, &block{{/object_type?}})
+    dsl_attribute(:{{property_name}}, value {{#object_type?}}, attr_class: {{ruby_type}}, **value_hash, &block{{/object_type?}})
+  end
+
+{{/list_type?}}
+{{#list_type?}}
+{{#plural?}}
+  # @param [Array<{{ruby_type}}>|JSONable>] values{{#description}}
+  #   {{{.}}}{{/description}}
+  def {{plural_name}}(values)
+    dsl_list_attribute(:{{property_name}},values)
+  end
+{{/plural?}}
+
+{{#singular?}}
+    #  @param [{{ruby_type}}|JSONable] value  Append value to the List{{#description}}
+    #    {{{.}}}{{/description}}{{#object_type?}}
+    # @@overload {{singular_name}}(&block)
+    # Append value to the List from block via instance eval of a new {{ruby_type}}{{/object_type?}}
+    def {{singular_name}}(value{{#object_type?}}=nil{{/object_type?}},fn_if: nil{{#object_type?}}, **value_hash, &block{{/object_type?}})
+      dsl_push_attribute(:{{property_name}},value,fn_if: fn_if {{#object_type?}}, attr_class: {{ruby_type}}, **value_hash, &block{{/object_type?}})
+    end
+{{/singular?}}
+{{/list_type?}}
+{{/properties}}

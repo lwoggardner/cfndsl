@@ -2,14 +2,16 @@
 
 source 'https://rubygems.org'
 
-gemspec
+gem 'cfndsl', path: 'gems/cfndsl'
+gem 'cfndsl-aws', path: 'gems/cfndsl-aws'
+gem 'cfndsl-core', path: 'gems/cfndsl-core'
+gem 'cfndsl-generate', path: 'gems/cfndsl-generate'
+# gem 'cfndsl-aws-serverless', path: 'gems/cfndsl-aws-serverless'
 
-gem 'json'
-
-group :development, :test do
-  gem 'github_changelog_generator', require: false
-  gem 'rubocop', require: false
-  gem 'yamllint', require: false
+group :development, :test, optional: true do
+  gem 'github_changelog_generator'
+  gem 'rubocop'
+  gem 'yamllint'
 end
 
 group :test do

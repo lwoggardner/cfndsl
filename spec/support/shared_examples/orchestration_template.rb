@@ -65,24 +65,23 @@ shared_examples 'an orchestration template' do
 
   context '.create_types' do
     it 'creates a type class for each entry' do
-      expect(described_class.type_module).to be_const_defined('AWS_EC2_Instance')
-      expect(described_class.type_module.const_get('AWS_EC2_Instance')).to be < CfnDsl::ResourceDefinition
+      expect(CfnDsl::AWS::EC2::Instance).to be < CfnDsl::ResourceType
     end
 
     it 'defines case-insensitive properties for each type class' do
-      ec2_instance = described_class.type_module.const_get('AWS_EC2_Instance').new
+      ec2_instance = CfnDsl::AWS::EC2::Instance.new
       expect(ec2_instance).to respond_to(:imageId)
       expect(ec2_instance).to respond_to(:ImageId)
     end
 
     it 'defines singular and plural methods for array properties' do
-      ec2_instance = described_class.type_module.const_get('AWS_EC2_Instance').new
+      ec2_instance = CfnDsl::AWS::EC2::Instance.new
       ec2_instance.SecurityGroup(foo: 'bar')
-      singular_value = ec2_instance.instance_variable_get('@Properties')['SecurityGroups'].value
+      singular_value = ec2_instance.instance_variable_get('@Properties')['SecurityGroups']
       expect(singular_value).to eq([{ foo: 'bar' }])
-      ec2_instance = described_class.type_module.const_get('AWS_EC2_Instance').new
+      ec2_instance = CfnDsl::AWS::EC2::Instance.new
       ec2_instance.SecurityGroups([{ foo: 'bar' }])
-      plural_value = ec2_instance.instance_variable_get('@Properties')['SecurityGroups'].value
+      plural_value = ec2_instance.instance_variable_get('@Properties')['SecurityGroups']
       expect(plural_value).to eq([{ foo: 'bar' }])
     end
 
@@ -96,16 +95,16 @@ shared_examples 'an orchestration template' do
     end
 
     it 'avoids duplicating singular and plural methods' do
-      security_group = described_class.type_module.const_get('AWS_EC2_SecurityGroup').new
+      security_group = CfnDsl::AWS::EC2::SecurityGroup.new
       security_group.SecurityGroupIngress([{ foo: 'bar' }])
-      plural_value = security_group.instance_variable_get('@Properties')['SecurityGroupIngress'].value
+      plural_value = security_group.instance_variable_get('@Properties')['SecurityGroupIngress']
       expect(plural_value).to eq([{ foo: 'bar' }])
     end
 
     it 'allows array returning function for otherwise array value when singular name == plural name' do
-      security_group = described_class.type_module.const_get('AWS_EC2_SecurityGroup').new
+      security_group = CfnDsl::AWS::EC2::SecurityGroup.new
       security_group.Property('SecurityGroupIngress', security_group.FnFindInMap('x', 'y', 'z'))
-      plural_value = security_group.instance_variable_get('@Properties')['SecurityGroupIngress'].value
+      plural_value = security_group.instance_variable_get('@Properties')['SecurityGroupIngress']
       expect(plural_value.to_json).to eql('{"Fn::FindInMap":["x","y","z"]}')
     end
 

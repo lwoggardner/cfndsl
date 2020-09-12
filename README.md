@@ -5,8 +5,8 @@ cfndsl
 [![Gem Version](https://badge.fury.io/rb/cfndsl.png)](http://badge.fury.io/rb/cfndsl)
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/cfndsl/cfndsl?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) [![Join the chat at https://gitter.im/cfndsl/cfndsl](https://badges.gitter.im/cfndsl/cfndsl.svg)](https://gitter.im/cfndsl/cfndsl?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-[AWS Cloudformation](http://docs.amazonwebservices.com/AWSCloudFormation/latest/UserGuide/GettingStarted.html) templates are an incredibly powerful way to build
-sets of resources in Amazon's AWS environment.
+[AWS Cloudformation](http://docs.amazonwebservices.com/AWSCloudFormation/latest/UserGuide/GettingStarted.html) 
+templates are an incredibly powerful way to build sets of resources in Amazon's AWS environment.
 Unfortunately, because they are specified in JSON or YAML, they are also difficult to write and maintain:
 
 * JSON does not allow comments, although CloudFormation now supports YAML
@@ -30,14 +30,6 @@ Example for doing it system wide Ruby
 
     sudo gem install cfndsl
 
-Update the the cloudformation specification to the latest version.
-
-    cfndsl -u
-
-or update to a specific version
-
-    cfndsl -u 7.1.0
-
 Now write a template in the dsl
 
 ```ruby
@@ -53,7 +45,7 @@ CloudFormation {
 
   Output(:One,FnBase64( Ref("One")))
 
-  EC2_Instance(:MyInstance) {
+  AWS_EC2_Instance(:MyInstance) {
     ImageId "ami-12345678"
   }
 
@@ -109,7 +101,7 @@ Metadata is a special template section described [here](http://docs.aws.amazon.c
 CloudFormation do
   Metadata(foo: 'bar')
 
-  EC2_Instance(:myInstance) do
+  AWS_EC2_Instance(:myInstance) do
     ImageId 'ami-12345678'
     InstanceType 't1.micro'
   end
@@ -158,7 +150,7 @@ end
 Parameters can be referenced later in your template:
 
 ```ruby
-EC2_Instance(:myInstance) do
+AWS_EC2_Instance(:myInstance) do
   InstanceType 'm3.xlarge'
   UserData Ref('foo')
 end
@@ -196,7 +188,7 @@ end
 You can then reference them later in your template using the `FnFindInMap` method:
 
 ```ruby
-EC2_Instance(:myInstance) do
+AWS_EC2_Instance(:myInstance) do
   InstanceType 'm3.xlarge'
   UserData FnFindInMap('foo', :numbers, :one)
 end
@@ -208,7 +200,7 @@ Outputs are declared one at a time and must be given a name and a value at a min
 
 ```ruby
 CloudFormation do
-  EC2_Instance(:myInstance) do
+  AWS_EC2_Instance(:myInstance) do
     ImageId 'ami-12345678'
     Type 't1.micro'
   end
@@ -255,7 +247,7 @@ CloudFormation do
 
   Condition(:createResource, FnEquals(Ref(:environment), 'production'))
 
-  EC2_Instance(:myInstance) do
+  AWS_EC2_Instance(:myInstance) do
     Condition :createResource
     ImageId 'ami-12345678'
     Type 't1.micro'
@@ -348,12 +340,12 @@ Resources can depend upon other resources explicitly using `DependsOn`. It accep
 
 ```ruby
 CloudFormation do
-  EC2_Instance(:database) do
+  AWS_EC2_Instance(:database) do
     ImageId 'ami-12345678'
     Type 't1.micro'
   end
 
-  EC2_Instance(:webserver) do
+  AWS_EC2_Instance(:webserver) do
     DependsOn :database
     ImageId 'ami-12345678'
     Type 't1.micro'
@@ -388,7 +380,7 @@ Resources can have [deletion policies](http://docs.aws.amazon.com/AWSCloudFormat
 
 ```ruby
 CloudFormation do
-  EC2_Instance(:myInstance) do
+  AWS_EC2_Instance(:myInstance) do
     DeletionPolicy 'Retain'
     ImageId 'ami-12345678'
     Type 't1.micro'
@@ -402,7 +394,7 @@ You can attach arbitrary [metadata](http://docs.aws.amazon.com/AWSCloudFormation
 
 ```ruby
 CloudFormation do
-  EC2_Instance(:myInstance) do
+  AWS_EC2_Instance(:myInstance) do
     Metadata(foo: 'bar')
     ImageId 'ami-12345678'
     Type 't1.micro'
@@ -416,7 +408,7 @@ These attributes are only usable on particular [resources](http://docs.aws.amazo
 
 ```ruby
 CloudFormation do
-  EC2_Instance(:myInstance) do
+  AWS_EC2_Instance(:myInstance) do
     ImageId 'ami-12345678'
     Type 't1.micro'
     CreationPolicy(:ResourceSignal, { Count: 1, Timeout: 'PT1M' })
@@ -446,11 +438,6 @@ Usage: cfndsl [options] FILE
     -D, --define "VARIABLE=VALUE"    Directly set local VARIABLE as VALUE
     -v, --verbose                    Turn on verbose ouptut
     -m, --disable-deep-merge         Disable deep merging of yaml
-    -s, --specification-file FILE    Location of Cloudformation Resource Specification file
-    -u [VERSION],                    Update the Resource Specification file to latest, or specific version
-        --update-specification
-    -g RESOURCE_TYPE,RESOURCE_LOGICAL_NAME,
-        --generate                   Add resource type and logical name
     -l, --list                       List supported resources
     -h, --help                       Display this screen
 ```
@@ -480,7 +467,7 @@ CloudFormation do
 
   (1..machines).each do |i|
     name = "machine#{i}"
-    EC2_Instance(name) do
+    AWS_EC2_Instance(name) do
       ImageId 'ami-12345678'
       Type 't1.micro'
     end
@@ -573,8 +560,6 @@ require 'cfndsl/rake_task'
 
 namespace(:cfndsl) do
   CfnDsl::RakeTask.new do |t|
-    # Use a custom specification file
-    t.specification(file: 'tmp/cloudformation_resources.json')
 
     desc 'Generate CloudFormation Json'
     t.json(name: :json, files: FileList.new('sample/*.rb'), pathmap: 'tmp/%f.json')
@@ -596,7 +581,6 @@ $ bin/rake cfndsl:generate
 
 # Optionally before requiring 'cfndsl' set global options
 require `cfndsl/globals`
-CfnDsl.specification_file(file) # Override location of json spec file 
 CfnDsl.disable_deep_merge       # Prevent monkey patching of Hash with deep merge capabilities
 
 require `cfndsl`
@@ -617,7 +601,7 @@ class MyTemplate < CfnDsl::CloudFormationTemplate
   
   def instance(logical_id)
     this = self
-    EC2_Instance(logical_id) do
+    AWS_EC2_Instance(logical_id) do
       self.class.name # << 'CfnDsl::ResourceDefinition' not 'MyTemplate' !
       InstanceType this.instance_type  
     end 
@@ -643,23 +627,3 @@ class Builder
   end
 end
 ```
-
-### Generating CloudFormation resources from cfndsl
-By supplying the -g parameter you are now able to generate cloudformation resources for supported objects, for a list of supported resources run cfndsl -l
-
-Example
-```bash
-cfndsl -g AWS::EC2::EIP,EIP
-```
-```ruby
-require 'cfndsl'
-CloudFormation do
-  Description 'auto generated cloudformation cfndsl template'
-
-  EC2_EIP('EIP') do
-        Domain String # http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-eip.html#cfn-ec2-eip-domain
-        InstanceId String # http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-ec2-eip.html#cfn-ec2-eip-instanceid
-  end
-end
-```
-Many thanks to the base code from cfnlego to make this possible!
