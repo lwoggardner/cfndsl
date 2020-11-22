@@ -2,4 +2,4 @@
 
 require 'cfndsl_core'
 require 'cfndsl_aws'
-# TODO: require 'cfndsl-aws-serverless'
+require_relative 'cfndsl/version'

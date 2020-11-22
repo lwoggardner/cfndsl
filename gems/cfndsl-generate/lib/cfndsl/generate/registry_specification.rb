@@ -27,7 +27,7 @@ module CfnDsl
         end
 
         def description
-          (@spec['description'] || "Property Definition #{@ruby_type}").chomp.split('\n')
+          (@spec['description'] || "Property Definition #{@ruby_type}").chomp.split("\n")
         end
 
         def source_url
@@ -50,7 +50,7 @@ module CfnDsl
             # ['object','string'] is used to refer to items that are typically JSONObject or string
             @spec['type'].map(&:capitalize).join('|')
           else
-            @spec['type'].capitalize
+            @spec['type']&.capitalize
           end
         end
       end

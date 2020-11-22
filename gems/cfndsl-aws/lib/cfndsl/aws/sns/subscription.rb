@@ -56,6 +56,12 @@ module CfnDsl
         end
 
         #   @param [String|JSONable] value
+        #     The value to use for SubscriptionRoleArn
+        def SubscriptionRoleArn(value)
+          dsl_attribute(:SubscriptionRoleArn, value)
+        end
+
+        #   @param [String|JSONable] value
         #     The value to use for Id
         def Id(value)
           dsl_attribute(:Id, value)

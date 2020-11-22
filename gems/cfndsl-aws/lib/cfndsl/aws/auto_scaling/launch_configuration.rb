@@ -13,22 +13,29 @@ module CfnDsl
     module AutoScaling
       # Resource Type definition for AWS::AutoScaling::LaunchConfiguration
       class LaunchConfiguration < ResourceType
+        # Property Definition MetadataOption
+        class MetadataOption < PropertyType
+          #   @param [Integer|JSONable] value
+          #     The value to use for HttpPutResponseHopLimit
+          def HttpPutResponseHopLimit(value)
+            dsl_attribute(:HttpPutResponseHopLimit, value)
+          end
+
+          #   @param [String|JSONable] value
+          #     The value to use for HttpTokens
+          def HttpTokens(value)
+            dsl_attribute(:HttpTokens, value)
+          end
+
+          #   @param [String|JSONable] value
+          #     The value to use for HttpEndpoint
+          def HttpEndpoint(value)
+            dsl_attribute(:HttpEndpoint, value)
+          end
+        end
+
         # Property Definition BlockDeviceMapping
         class BlockDeviceMapping < PropertyType
-          #   @param [String|JSONable] value
-          #     The value to use for DeviceName
-          def DeviceName(value)
-            dsl_attribute(:DeviceName, value)
-          end
-
-          #   @param [BlockDevice|JSONable] value
-          #     The value to use for Ebs
-          # @@overload Ebs(&block)
-          #   Set :Ebs from block via instance eval of a new BlockDevice
-          def Ebs(value = nil, **value_hash, &block)
-            dsl_attribute(:Ebs, value, attr_class: BlockDevice, **value_hash, &block)
-          end
-
           #   @param [Boolean|JSONable] value
           #     The value to use for NoDevice
           def NoDevice(value)
@@ -40,14 +47,34 @@ module CfnDsl
           def VirtualName(value)
             dsl_attribute(:VirtualName, value)
           end
+
+          #   @param [BlockDevice|JSONable] value
+          #     The value to use for Ebs
+          # @@overload Ebs(&block)
+          #   Set :Ebs from block via instance eval of a new BlockDevice
+          def Ebs(value = nil, **value_hash, &block)
+            dsl_attribute(:Ebs, value, attr_class: BlockDevice, **value_hash, &block)
+          end
+
+          #   @param [String|JSONable] value
+          #     The value to use for DeviceName
+          def DeviceName(value)
+            dsl_attribute(:DeviceName, value)
+          end
         end
 
         # Property Definition BlockDevice
         class BlockDevice < PropertyType
-          #   @param [Boolean|JSONable] value
-          #     The value to use for DeleteOnTermination
-          def DeleteOnTermination(value)
-            dsl_attribute(:DeleteOnTermination, value)
+          #   @param [String|JSONable] value
+          #     The value to use for SnapshotId
+          def SnapshotId(value)
+            dsl_attribute(:SnapshotId, value)
+          end
+
+          #   @param [String|JSONable] value
+          #     The value to use for VolumeType
+          def VolumeType(value)
+            dsl_attribute(:VolumeType, value)
           end
 
           #   @param [Boolean|JSONable] value
@@ -62,35 +89,73 @@ module CfnDsl
             dsl_attribute(:Iops, value)
           end
 
-          #   @param [String|JSONable] value
-          #     The value to use for SnapshotId
-          def SnapshotId(value)
-            dsl_attribute(:SnapshotId, value)
-          end
-
           #   @param [Integer|JSONable] value
           #     The value to use for VolumeSize
           def VolumeSize(value)
             dsl_attribute(:VolumeSize, value)
           end
 
-          #   @param [String|JSONable] value
-          #     The value to use for VolumeType
-          def VolumeType(value)
-            dsl_attribute(:VolumeType, value)
+          #   @param [Boolean|JSONable] value
+          #     The value to use for DeleteOnTermination
+          def DeleteOnTermination(value)
+            dsl_attribute(:DeleteOnTermination, value)
           end
         end
 
         #   @param [String|JSONable] value
-        #     The value to use for Id
-        def Id(value)
-          dsl_attribute(:Id, value)
+        #     The value to use for PlacementTenancy
+        def PlacementTenancy(value)
+          dsl_attribute(:PlacementTenancy, value)
         end
 
-        #   @param [Boolean|JSONable] value
-        #     The value to use for AssociatePublicIpAddress
-        def AssociatePublicIpAddress(value)
-          dsl_attribute(:AssociatePublicIpAddress, value)
+        # @param [Array<String>|JSONable>] values
+        #   The List of values to use for SecurityGroups
+        def SecurityGroups(values)
+          dsl_list_attribute(:SecurityGroups, values)
+        end
+
+        #  @param [String|JSONable] value  Append value to the List
+        #    The List of values to use for SecurityGroups
+        def SecurityGroup(value, fn_if: nil)
+          dsl_push_attribute(:SecurityGroups, value, fn_if: fn_if)
+        end
+
+        #   @param [String|JSONable] value
+        #     The value to use for LaunchConfigurationName
+        def LaunchConfigurationName(value)
+          dsl_attribute(:LaunchConfigurationName, value)
+        end
+
+        #   @param [MetadataOption|JSONable] value
+        #     The value to use for MetadataOptions
+        # @@overload MetadataOptions(&block)
+        #   Set :MetadataOptions from block via instance eval of a new MetadataOption
+        def MetadataOptions(value = nil, **value_hash, &block)
+          dsl_attribute(:MetadataOptions, value, attr_class: MetadataOption, **value_hash, &block)
+        end
+
+        #   @param [String|JSONable] value
+        #     The value to use for InstanceId
+        def InstanceId(value)
+          dsl_attribute(:InstanceId, value)
+        end
+
+        #   @param [String|JSONable] value
+        #     The value to use for UserData
+        def UserData(value)
+          dsl_attribute(:UserData, value)
+        end
+
+        # @param [Array<String>|JSONable>] values
+        #   The List of values to use for ClassicLinkVPCSecurityGroups
+        def ClassicLinkVPCSecurityGroups(values)
+          dsl_list_attribute(:ClassicLinkVPCSecurityGroups, values)
+        end
+
+        #  @param [String|JSONable] value  Append value to the List
+        #    The List of values to use for ClassicLinkVPCSecurityGroups
+        def ClassicLinkVPCSecurityGroup(value, fn_if: nil)
+          dsl_push_attribute(:ClassicLinkVPCSecurityGroups, value, fn_if: fn_if)
         end
 
         # @param [Array<BlockDeviceMapping>|JSONable>] values
@@ -108,21 +173,27 @@ module CfnDsl
         end
 
         #   @param [String|JSONable] value
+        #     The value to use for IamInstanceProfile
+        def IamInstanceProfile(value)
+          dsl_attribute(:IamInstanceProfile, value)
+        end
+
+        #   @param [String|JSONable] value
+        #     The value to use for KernelId
+        def KernelId(value)
+          dsl_attribute(:KernelId, value)
+        end
+
+        #   @param [Boolean|JSONable] value
+        #     The value to use for AssociatePublicIpAddress
+        def AssociatePublicIpAddress(value)
+          dsl_attribute(:AssociatePublicIpAddress, value)
+        end
+
+        #   @param [String|JSONable] value
         #     The value to use for ClassicLinkVPCId
         def ClassicLinkVPCId(value)
           dsl_attribute(:ClassicLinkVPCId, value)
-        end
-
-        # @param [Array<String>|JSONable>] values
-        #   The List of values to use for ClassicLinkVPCSecurityGroups
-        def ClassicLinkVPCSecurityGroups(values)
-          dsl_list_attribute(:ClassicLinkVPCSecurityGroups, values)
-        end
-
-        #  @param [String|JSONable] value  Append value to the List
-        #    The List of values to use for ClassicLinkVPCSecurityGroups
-        def ClassicLinkVPCSecurityGroup(value, fn_if: nil)
-          dsl_push_attribute(:ClassicLinkVPCSecurityGroups, value, fn_if: fn_if)
         end
 
         #   @param [Boolean|JSONable] value
@@ -132,75 +203,9 @@ module CfnDsl
         end
 
         #   @param [String|JSONable] value
-        #     The value to use for IamInstanceProfile
-        def IamInstanceProfile(value)
-          dsl_attribute(:IamInstanceProfile, value)
-        end
-
-        #   @param [String|JSONable] value
-        #     The value to use for ImageId
-        def ImageId(value)
-          dsl_attribute(:ImageId, value)
-        end
-
-        #   @param [String|JSONable] value
-        #     The value to use for InstanceId
-        def InstanceId(value)
-          dsl_attribute(:InstanceId, value)
-        end
-
-        #   @param [Boolean|JSONable] value
-        #     The value to use for InstanceMonitoring
-        def InstanceMonitoring(value)
-          dsl_attribute(:InstanceMonitoring, value)
-        end
-
-        #   @param [String|JSONable] value
-        #     The value to use for InstanceType
-        def InstanceType(value)
-          dsl_attribute(:InstanceType, value)
-        end
-
-        #   @param [String|JSONable] value
-        #     The value to use for KernelId
-        def KernelId(value)
-          dsl_attribute(:KernelId, value)
-        end
-
-        #   @param [String|JSONable] value
         #     The value to use for KeyName
         def KeyName(value)
           dsl_attribute(:KeyName, value)
-        end
-
-        #   @param [String|JSONable] value
-        #     The value to use for LaunchConfigurationName
-        def LaunchConfigurationName(value)
-          dsl_attribute(:LaunchConfigurationName, value)
-        end
-
-        #   @param [String|JSONable] value
-        #     The value to use for PlacementTenancy
-        def PlacementTenancy(value)
-          dsl_attribute(:PlacementTenancy, value)
-        end
-
-        #   @param [String|JSONable] value
-        #     The value to use for RamDiskId
-        def RamDiskId(value)
-          dsl_attribute(:RamDiskId, value)
-        end
-
-        # @param [Array<String>|JSONable>] values
-        #   The List of values to use for SecurityGroups
-        def SecurityGroups(values)
-          dsl_list_attribute(:SecurityGroups, values)
-        end
-
-        #  @param [String|JSONable] value  Append value to the List
-        #    The List of values to use for SecurityGroups
-        def SecurityGroup(value, fn_if: nil)
-          dsl_push_attribute(:SecurityGroups, value, fn_if: fn_if)
         end
 
         #   @param [String|JSONable] value
@@ -210,9 +215,33 @@ module CfnDsl
         end
 
         #   @param [String|JSONable] value
-        #     The value to use for UserData
-        def UserData(value)
-          dsl_attribute(:UserData, value)
+        #     The value to use for ImageId
+        def ImageId(value)
+          dsl_attribute(:ImageId, value)
+        end
+
+        #   @param [String|JSONable] value
+        #     The value to use for Id
+        def Id(value)
+          dsl_attribute(:Id, value)
+        end
+
+        #   @param [String|JSONable] value
+        #     The value to use for InstanceType
+        def InstanceType(value)
+          dsl_attribute(:InstanceType, value)
+        end
+
+        #   @param [String|JSONable] value
+        #     The value to use for RamDiskId
+        def RamDiskId(value)
+          dsl_attribute(:RamDiskId, value)
+        end
+
+        #   @param [Boolean|JSONable] value
+        #     The value to use for InstanceMonitoring
+        def InstanceMonitoring(value)
+          dsl_attribute(:InstanceMonitoring, value)
         end
       end
     end

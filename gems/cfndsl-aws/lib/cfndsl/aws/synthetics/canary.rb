@@ -123,6 +123,18 @@ module CfnDsl
           def MemoryInMB(value)
             dsl_attribute(:MemoryInMB, value)
           end
+
+          #   @param [Boolean|JSONable] value
+          #     Enable active tracing if set to true
+          def ActiveTracing(value)
+            dsl_attribute(:ActiveTracing, value)
+          end
+
+          #   @param [Object|JSONable] value
+          #     Environment variable key-value pairs.
+          def EnvironmentVariables(value)
+            dsl_attribute(:EnvironmentVariables, value)
+          end
         end
 
         #   @param [String|JSONable] value

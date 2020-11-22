@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'lib/cfndsl/generate/version'
+require_relative '../../gems/cfndsl-core/lib/cfndsl/version'
 
 Gem::Specification.new do |s|
   s.name          = 'cfndsl-generate'
@@ -16,8 +17,7 @@ Gem::Specification.new do |s|
   s.bindir        = 'bin'
   s.executables   = s.files.grep(%r{^bin/}) { |f| File.basename(f) }
   s.require_paths = ['lib']
-  s.add_runtime_dependency 'cfndsl-core'
-  s.add_runtime_dependency 'digest-xxhash'
+  s.add_runtime_dependency 'cfndsl-core', Gem::Version.new(CfnDsl::CORE_VERSION).approximate_recommendation
   s.add_runtime_dependency 'mustache'
   s.add_runtime_dependency 'rubyzip'
   s.add_runtime_dependency 'rufo'

@@ -68,6 +68,12 @@ module CfnDsl
           dsl_attribute(:Description, value)
         end
 
+        #   @param [String|JSONable] value
+        #     FAQ file format
+        def FileFormat(value)
+          dsl_attribute(:FileFormat, value)
+        end
+
         #   @param [S3Path|JSONable] value
         #     FAQ S3 path
         # @@overload S3Path(&block)

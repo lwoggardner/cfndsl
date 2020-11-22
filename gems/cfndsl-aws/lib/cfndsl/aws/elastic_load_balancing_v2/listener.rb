@@ -12,6 +12,7 @@ module CfnDsl
   module AWS
     module ElasticLoadBalancingV2
       # Resource Type definition for AWS::ElasticLoadBalancingV2::Listener
+      # @see https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-elasticloadbalancingv2.git
       class Listener < ResourceType
         # Property Definition FixedResponseConfig
         class FixedResponseConfig < PropertyType
@@ -130,7 +131,7 @@ module CfnDsl
             dsl_attribute(:UserPoolDomain, value)
           end
 
-          #   @param [Integer|JSONable] value
+          #   @param [String|JSONable] value
           #     The value to use for SessionTimeout
           def SessionTimeout(value)
             dsl_attribute(:SessionTimeout, value)
@@ -254,7 +255,7 @@ module CfnDsl
             dsl_attribute(:TokenEndpoint, value)
           end
 
-          #   @param [Integer|JSONable] value
+          #   @param [String|JSONable] value
           #     The value to use for SessionTimeout
           def SessionTimeout(value)
             dsl_attribute(:SessionTimeout, value)
@@ -318,18 +319,6 @@ module CfnDsl
           end
         end
 
-        # @param [Array<String>|JSONable>] values
-        #   The List of values to use for AlpnPolicy
-        def AlpnPolicies(values)
-          dsl_list_attribute(:AlpnPolicy, values)
-        end
-
-        #  @param [String|JSONable] value  Append value to the List
-        #    The List of values to use for AlpnPolicy
-        def AlpnPolicy(value, fn_if: nil)
-          dsl_push_attribute(:AlpnPolicy, value, fn_if: fn_if)
-        end
-
         #   @param [String|JSONable] value
         #     The value to use for SslPolicy
         def SslPolicy(value)
@@ -377,15 +366,27 @@ module CfnDsl
         end
 
         #   @param [String|JSONable] value
-        #     The value to use for Id
-        def Id(value)
-          dsl_attribute(:Id, value)
-        end
-
-        #   @param [String|JSONable] value
         #     The value to use for Protocol
         def Protocol(value)
           dsl_attribute(:Protocol, value)
+        end
+
+        #   @param [String|JSONable] value
+        #     The value to use for ListenerArn
+        def ListenerArn(value)
+          dsl_attribute(:ListenerArn, value)
+        end
+
+        # @param [Array<String>|JSONable>] values
+        #   The List of values to use for AlpnPolicy
+        def AlpnPolicies(values)
+          dsl_list_attribute(:AlpnPolicy, values)
+        end
+
+        #  @param [String|JSONable] value  Append value to the List
+        #    The List of values to use for AlpnPolicy
+        def AlpnPolicy(value, fn_if: nil)
+          dsl_push_attribute(:AlpnPolicy, value, fn_if: fn_if)
         end
       end
     end

@@ -7,9 +7,11 @@
 # WARNING ABOUT GENERATED CODE
 require_relative 'io_t/authorizer'
 require_relative 'io_t/certificate'
+require_relative 'io_t/domain_configuration'
 require_relative 'io_t/policy'
 require_relative 'io_t/policy_principal_attachment'
 require_relative 'io_t/provisioning_template'
 require_relative 'io_t/thing'
 require_relative 'io_t/thing_principal_attachment'
 require_relative 'io_t/topic_rule'
+require_relative 'io_t/topic_rule_destination'

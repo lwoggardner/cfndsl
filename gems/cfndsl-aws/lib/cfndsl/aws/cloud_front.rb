@@ -8,6 +8,8 @@
 require_relative 'cloud_front/cache_policy'
 require_relative 'cloud_front/cloud_front_origin_access_identity'
 require_relative 'cloud_front/distribution'
+require_relative 'cloud_front/key_group'
 require_relative 'cloud_front/origin_request_policy'
+require_relative 'cloud_front/public_key'
 require_relative 'cloud_front/realtime_log_config'
 require_relative 'cloud_front/streaming_distribution'

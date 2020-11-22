@@ -6,6 +6,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 require_relative 'lambda/alias'
+require_relative 'lambda/code_signing_config'
 require_relative 'lambda/event_invoke_config'
 require_relative 'lambda/event_source_mapping'
 require_relative 'lambda/function'

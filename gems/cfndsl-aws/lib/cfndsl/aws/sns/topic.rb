@@ -56,6 +56,12 @@ module CfnDsl
         end
 
         #   @param [Boolean|JSONable] value
+        #     The value to use for FifoTopic
+        def FifoTopic(value)
+          dsl_attribute(:FifoTopic, value)
+        end
+
+        #   @param [Boolean|JSONable] value
         #     The value to use for ContentBasedDeduplication
         def ContentBasedDeduplication(value)
           dsl_attribute(:ContentBasedDeduplication, value)

@@ -11,51 +11,54 @@ require 'cfndsl/types'
 module CfnDsl
   module AWS
     module Route53
-      # Resource Type definition for AWS::Route53::HostedZone
+      # Resource schema for AWS::Route53::HostedZone.
+      # @see https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-route53.git
       class HostedZone < ResourceType
-        # Property Definition HostedZoneConfig
+        # A complex type that contains an optional comment.
+        #
+        # If you don't want to specify a comment, omit the HostedZoneConfig and Comment elements.
         class HostedZoneConfig < PropertyType
           #   @param [String|JSONable] value
-          #     The value to use for Comment
+          #     Any comments that you want to include about the hosted zone.
           def Comment(value)
             dsl_attribute(:Comment, value)
           end
         end
 
-        # Property Definition HostedZoneTag
+        # A complex type that contains information about a tag that you want to add or edit for the specified health check or hosted zone.
         class HostedZoneTag < PropertyType
           #   @param [String|JSONable] value
-          #     The value to use for Key
+          #     The key name of the tag.
           def Key(value)
             dsl_attribute(:Key, value)
           end
 
           #   @param [String|JSONable] value
-          #     The value to use for Value
+          #     The value for the tag.
           def Value(value)
             dsl_attribute(:Value, value)
           end
         end
 
-        # Property Definition QueryLoggingConfig
+        # A complex type that contains information about a configuration for DNS query logging.
         class QueryLoggingConfig < PropertyType
           #   @param [String|JSONable] value
-          #     The value to use for CloudWatchLogsLogGroupArn
+          #     The Amazon Resource Name (ARN) of the CloudWatch Logs log group that Amazon Route 53 is publishing logs to.
           def CloudWatchLogsLogGroupArn(value)
             dsl_attribute(:CloudWatchLogsLogGroupArn, value)
           end
         end
 
-        # Property Definition VPC
+        # A complex type that contains information about an Amazon VPC. Route 53 Resolver uses the records in the private hosted zone to route traffic in that VPC.
         class VPC < PropertyType
           #   @param [String|JSONable] value
-          #     The value to use for VPCId
+          #     The ID of an Amazon VPC.
           def VPCId(value)
             dsl_attribute(:VPCId, value)
           end
 
           #   @param [String|JSONable] value
-          #     The value to use for VPCRegion
+          #     The region that an Amazon VPC was created in.
           def VPCRegion(value)
             dsl_attribute(:VPCRegion, value)
           end
@@ -67,18 +70,6 @@ module CfnDsl
           dsl_attribute(:Id, value)
         end
 
-        # @param [Array<String>|JSONable>] values
-        #   The List of values to use for NameServers
-        def NameServers(values)
-          dsl_list_attribute(:NameServers, values)
-        end
-
-        #  @param [String|JSONable] value  Append value to the List
-        #    The List of values to use for NameServers
-        def NameServer(value, fn_if: nil)
-          dsl_push_attribute(:NameServers, value, fn_if: fn_if)
-        end
-
         #   @param [HostedZoneConfig|JSONable] value
         #     The value to use for HostedZoneConfig
         # @@overload HostedZoneConfig(&block)
@@ -88,13 +79,17 @@ module CfnDsl
         end
 
         # @param [Array<HostedZoneTag>|JSONable>] values
-        #   The List of values to use for HostedZoneTags
+        #   Adds, edits, or deletes tags for a health check or a hosted zone.
+        #
+        #   For information about using tags for cost allocation, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide.
         def HostedZoneTags(values)
           dsl_list_attribute(:HostedZoneTags, values)
         end
 
         #  @param [HostedZoneTag|JSONable] value  Append value to the List
-        #    The List of values to use for HostedZoneTags
+        #    Adds, edits, or deletes tags for a health check or a hosted zone.
+        #
+        #    For information about using tags for cost allocation, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide.
         # @@overload HostedZoneTag(&block)
         # Append value to the List from block via instance eval of a new HostedZoneTag
         def HostedZoneTag(value = nil, fn_if: nil, **value_hash, &block)
@@ -102,7 +97,9 @@ module CfnDsl
         end
 
         #   @param [String|JSONable] value
-        #     The value to use for Name
+        #     The name of the domain. Specify a fully qualified domain name, for example, www.example.com. The trailing dot is optional; Amazon Route 53 assumes that the domain name is fully qualified. This means that Route 53 treats www.example.com (without a trailing dot) and www.example.com. (with a trailing dot) as identical.
+        #
+        #     If you're creating a public hosted zone, this is the name you have registered with your DNS registrar. If your domain name is registered with a registrar other than Route 53, change the name servers for your domain to the set of NameServers that are returned by the Fn::GetAtt intrinsic function.
         def Name(value)
           dsl_attribute(:Name, value)
         end
@@ -116,17 +113,29 @@ module CfnDsl
         end
 
         # @param [Array<VPC>|JSONable>] values
-        #   The List of values to use for VPCs
+        #   A complex type that contains information about the VPCs that are associated with the specified hosted zone.
         def VPCs(values)
           dsl_list_attribute(:VPCs, values)
         end
 
         #  @param [VPC|JSONable] value  Append value to the List
-        #    The List of values to use for VPCs
+        #    A complex type that contains information about the VPCs that are associated with the specified hosted zone.
         # @@overload VPC(&block)
         # Append value to the List from block via instance eval of a new VPC
         def VPC(value = nil, fn_if: nil, **value_hash, &block)
           dsl_push_attribute(:VPCs, value, fn_if: fn_if, attr_class: VPC, **value_hash, &block)
+        end
+
+        # @param [Array<String>|JSONable>] values
+        #   The List of values to use for NameServers
+        def NameServers(values)
+          dsl_list_attribute(:NameServers, values)
+        end
+
+        #  @param [String|JSONable] value  Append value to the List
+        #    The List of values to use for NameServers
+        def NameServer(value, fn_if: nil)
+          dsl_push_attribute(:NameServers, value, fn_if: fn_if)
         end
       end
     end

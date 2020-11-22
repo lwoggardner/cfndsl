@@ -421,6 +421,86 @@ module CfnDsl
           end
         end
 
+        # HTTP header.
+        class CustomHTTPHeader < PropertyType
+          #   @param [String|JSONable] value
+          #     The value to use for Name
+          def Name(value)
+            dsl_attribute(:Name, value)
+          end
+
+          #   @param [String|JSONable] value
+          #     The value to use for Value
+          def Value(value)
+            dsl_attribute(:Value, value)
+          end
+        end
+
+        # Custom request handling.
+        class CustomRequestHandling < PropertyType
+          # @param [Array<CustomHTTPHeader>|JSONable>] values
+          #   Collection of HTTP headers.
+          def InsertHeaders(values)
+            dsl_list_attribute(:InsertHeaders, values)
+          end
+
+          #  @param [CustomHTTPHeader|JSONable] value  Append value to the List
+          #    Collection of HTTP headers.
+          # @@overload InsertHeader(&block)
+          # Append value to the List from block via instance eval of a new CustomHTTPHeader
+          def InsertHeader(value = nil, fn_if: nil, **value_hash, &block)
+            dsl_push_attribute(:InsertHeaders, value, fn_if: fn_if, attr_class: CustomHTTPHeader, **value_hash, &block)
+          end
+        end
+
+        # Custom response body.
+        class CustomResponseBody < PropertyType
+          #   @param [String|JSONable] value
+          #     The value to use for ContentType
+          def ContentType(value)
+            dsl_attribute(:ContentType, value)
+          end
+
+          #   @param [String|JSONable] value
+          #     The value to use for Content
+          def Content(value)
+            dsl_attribute(:Content, value)
+          end
+        end
+
+        # Custom response.
+        class CustomResponse < PropertyType
+          #   @param [Integer|JSONable] value
+          #     The value to use for ResponseCode
+          def ResponseCode(value)
+            dsl_attribute(:ResponseCode, value)
+          end
+
+          #   @param [String|JSONable] value
+          #     Custom response body key.
+          def CustomResponseBodyKey(value)
+            dsl_attribute(:CustomResponseBodyKey, value)
+          end
+
+          # @param [Array<CustomHTTPHeader>|JSONable>] values
+          #   Collection of HTTP headers.
+          def ResponseHeaders(values)
+            dsl_list_attribute(:ResponseHeaders, values)
+          end
+
+          #  @param [CustomHTTPHeader|JSONable] value  Append value to the List
+          #    Collection of HTTP headers.
+          # @@overload ResponseHeader(&block)
+          # Append value to the List from block via instance eval of a new CustomHTTPHeader
+          def ResponseHeader(value = nil, fn_if: nil, **value_hash, &block)
+            dsl_push_attribute(:ResponseHeaders, value, fn_if: fn_if, attr_class: CustomHTTPHeader, **value_hash, &block)
+          end
+        end
+
+        # Custom response key and body map.
+        class CustomResponseBodies < PropertyType
+        end
+
         # Property Definition RuleGroup
         class RuleGroup < PropertyType
           #   @param [String|JSONable] value
@@ -925,6 +1005,14 @@ module CfnDsl
         # Append value to the List from block via instance eval of a new Tag
         def Tag(value = nil, fn_if: nil, **value_hash, &block)
           dsl_push_attribute(:Tags, value, fn_if: fn_if, attr_class: Tag, **value_hash, &block)
+        end
+
+        #   @param [CustomResponseBodies|JSONable] value
+        #     The value to use for CustomResponseBodies
+        # @@overload CustomResponseBodies(&block)
+        #   Set :CustomResponseBodies from block via instance eval of a new CustomResponseBodies
+        def CustomResponseBodies(value = nil, **value_hash, &block)
+          dsl_attribute(:CustomResponseBodies, value, attr_class: CustomResponseBodies, **value_hash, &block)
         end
       end
     end

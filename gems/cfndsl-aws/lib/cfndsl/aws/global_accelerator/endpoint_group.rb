@@ -35,6 +35,21 @@ module CfnDsl
           end
         end
 
+        # listener to endpoint port mapping.
+        class PortOverride < PropertyType
+          #   @param [Integer|JSONable] value
+          #     The value to use for ListenerPort
+          def ListenerPort(value)
+            dsl_attribute(:ListenerPort, value)
+          end
+
+          #   @param [Integer|JSONable] value
+          #     The value to use for EndpointPort
+          def EndpointPort(value)
+            dsl_attribute(:EndpointPort, value)
+          end
+        end
+
         #   @param [String|JSONable] value
         #     The Amazon Resource Name (ARN) of the listener
         def ListenerArn(value)
@@ -100,6 +115,20 @@ module CfnDsl
         #     The Amazon Resource Name (ARN) of the endpoint group
         def EndpointGroupArn(value)
           dsl_attribute(:EndpointGroupArn, value)
+        end
+
+        # @param [Array<PortOverride>|JSONable>] values
+        #   The List of values to use for PortOverrides
+        def PortOverrides(values)
+          dsl_list_attribute(:PortOverrides, values)
+        end
+
+        #  @param [PortOverride|JSONable] value  Append value to the List
+        #    The List of values to use for PortOverrides
+        # @@overload PortOverride(&block)
+        # Append value to the List from block via instance eval of a new PortOverride
+        def PortOverride(value = nil, fn_if: nil, **value_hash, &block)
+          dsl_push_attribute(:PortOverrides, value, fn_if: fn_if, attr_class: PortOverride, **value_hash, &block)
         end
       end
     end

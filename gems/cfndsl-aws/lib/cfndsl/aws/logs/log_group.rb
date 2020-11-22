@@ -11,28 +11,29 @@ require 'cfndsl/types'
 module CfnDsl
   module AWS
     module Logs
-      # Resource Type definition for AWS::Logs::LogGroup
+      # Resource schema for AWS::Logs::LogGroup
+      # @see https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-logs.git
       class LogGroup < ResourceType
-        #   @param [Integer|JSONable] value
-        #     The value to use for RetentionInDays
-        def RetentionInDays(value)
-          dsl_attribute(:RetentionInDays, value)
-        end
-
         #   @param [String|JSONable] value
-        #     The value to use for LogGroupName
+        #     The name of the log group. If you don't specify a name, AWS CloudFormation generates a unique ID for the log group.
         def LogGroupName(value)
           dsl_attribute(:LogGroupName, value)
         end
 
         #   @param [String|JSONable] value
-        #     The value to use for Id
-        def Id(value)
-          dsl_attribute(:Id, value)
+        #     The Amazon Resource Name (ARN) of the CMK to use when encrypting log data.
+        def KmsKeyId(value)
+          dsl_attribute(:KmsKeyId, value)
+        end
+
+        #   @param [Integer|JSONable] value
+        #     The number of days to retain the log events in the specified log group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1827, and 3653.
+        def RetentionInDays(value)
+          dsl_attribute(:RetentionInDays, value)
         end
 
         #   @param [String|JSONable] value
-        #     The value to use for Arn
+        #     The CloudWatch log group ARN.
         def Arn(value)
           dsl_attribute(:Arn, value)
         end

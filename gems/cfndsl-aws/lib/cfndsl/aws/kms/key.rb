@@ -17,13 +17,13 @@ module CfnDsl
         # A key-value pair to associate with a resource.
         class Tag < PropertyType
           #   @param [String|JSONable] value
-          #     The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+          #     The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
           def Key(value)
             dsl_attribute(:Key, value)
           end
 
           #   @param [String|JSONable] value
-          #     The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+          #     The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
           def Value(value)
             dsl_attribute(:Value, value)
           end
@@ -54,9 +54,15 @@ module CfnDsl
         end
 
         #   @param [String|JSONable] value
-        #     Determines the cryptographic operations for which you can use the CMK. The default value is ENCRYPT_DECRYPT. This parameter is required only for asymmetric CMKs. You can't change the KeyUsage value after the CMK is created.
+        #     Determines the cryptographic operations for which you can use the CMK. The default value is ENCRYPT_DECRYPT. This property is required only for asymmetric CMKs. You can't change the KeyUsage value after the CMK is created.
         def KeyUsage(value)
           dsl_attribute(:KeyUsage, value)
+        end
+
+        #   @param [String|JSONable] value
+        #     Specifies the type of CMK to create. The default value is SYMMETRIC_DEFAULT. This property is required only for asymmetric CMKs. You can't change the KeySpec value after the CMK is created.
+        def KeySpec(value)
+          dsl_attribute(:KeySpec, value)
         end
 
         #   @param [Integer|JSONable] value

@@ -83,6 +83,18 @@ module CfnDsl
           end
 
           # @param [Array<String>|JSONable>] values
+          #   The List of values to use for InclusionPatterns
+          def InclusionPatterns(values)
+            dsl_list_attribute(:InclusionPatterns, values)
+          end
+
+          #  @param [String|JSONable] value  Append value to the List
+          #    The List of values to use for InclusionPatterns
+          def InclusionPattern(value, fn_if: nil)
+            dsl_push_attribute(:InclusionPatterns, value, fn_if: fn_if)
+          end
+
+          # @param [Array<String>|JSONable>] values
           #   The List of values to use for ExclusionPatterns
           def ExclusionPatterns(values)
             dsl_list_attribute(:ExclusionPatterns, values)
@@ -247,6 +259,12 @@ module CfnDsl
           #     The value to use for DocumentTitleFieldName
           def DocumentTitleFieldName(value)
             dsl_attribute(:DocumentTitleFieldName, value)
+          end
+
+          #   @param [Boolean|JSONable] value
+          #     The value to use for DisableLocalGroups
+          def DisableLocalGroups(value)
+            dsl_attribute(:DisableLocalGroups, value)
           end
         end
 
@@ -739,6 +757,12 @@ module CfnDsl
           def FieldMapping(value = nil, fn_if: nil, **value_hash, &block)
             dsl_push_attribute(:FieldMappings, value, fn_if: fn_if, attr_class: DataSourceToIndexFieldMapping, **value_hash, &block)
           end
+
+          #   @param [Boolean|JSONable] value
+          #     The value to use for DisableLocalGroups
+          def DisableLocalGroups(value)
+            dsl_attribute(:DisableLocalGroups, value)
+          end
         end
 
         # Property Definition OneDriveUsers
@@ -919,6 +943,285 @@ module CfnDsl
           end
         end
 
+        # Property Definition ConfluenceConfiguration
+        class ConfluenceConfiguration < PropertyType
+          #   @param [String|JSONable] value
+          #     The value to use for ServerUrl
+          def ServerUrl(value)
+            dsl_attribute(:ServerUrl, value)
+          end
+
+          #   @param [String|JSONable] value
+          #     The value to use for SecretArn
+          def SecretArn(value)
+            dsl_attribute(:SecretArn, value)
+          end
+
+          #   @param [String|JSONable] value
+          #     The value to use for Version
+          def Version(value)
+            dsl_attribute(:Version, value)
+          end
+
+          #   @param [ConfluenceSpaceConfiguration|JSONable] value
+          #     The value to use for SpaceConfiguration
+          # @@overload SpaceConfiguration(&block)
+          #   Set :SpaceConfiguration from block via instance eval of a new ConfluenceSpaceConfiguration
+          def SpaceConfiguration(value = nil, **value_hash, &block)
+            dsl_attribute(:SpaceConfiguration, value, attr_class: ConfluenceSpaceConfiguration, **value_hash, &block)
+          end
+
+          #   @param [ConfluencePageConfiguration|JSONable] value
+          #     The value to use for PageConfiguration
+          # @@overload PageConfiguration(&block)
+          #   Set :PageConfiguration from block via instance eval of a new ConfluencePageConfiguration
+          def PageConfiguration(value = nil, **value_hash, &block)
+            dsl_attribute(:PageConfiguration, value, attr_class: ConfluencePageConfiguration, **value_hash, &block)
+          end
+
+          #   @param [ConfluenceBlogConfiguration|JSONable] value
+          #     The value to use for BlogConfiguration
+          # @@overload BlogConfiguration(&block)
+          #   Set :BlogConfiguration from block via instance eval of a new ConfluenceBlogConfiguration
+          def BlogConfiguration(value = nil, **value_hash, &block)
+            dsl_attribute(:BlogConfiguration, value, attr_class: ConfluenceBlogConfiguration, **value_hash, &block)
+          end
+
+          #   @param [ConfluenceAttachmentConfiguration|JSONable] value
+          #     The value to use for AttachmentConfiguration
+          # @@overload AttachmentConfiguration(&block)
+          #   Set :AttachmentConfiguration from block via instance eval of a new ConfluenceAttachmentConfiguration
+          def AttachmentConfiguration(value = nil, **value_hash, &block)
+            dsl_attribute(:AttachmentConfiguration, value, attr_class: ConfluenceAttachmentConfiguration, **value_hash, &block)
+          end
+
+          #   @param [DataSourceVpcConfiguration|JSONable] value
+          #     The value to use for VpcConfiguration
+          # @@overload VpcConfiguration(&block)
+          #   Set :VpcConfiguration from block via instance eval of a new DataSourceVpcConfiguration
+          def VpcConfiguration(value = nil, **value_hash, &block)
+            dsl_attribute(:VpcConfiguration, value, attr_class: DataSourceVpcConfiguration, **value_hash, &block)
+          end
+
+          # @param [Array<String>|JSONable>] values
+          #   The List of values to use for InclusionPatterns
+          def InclusionPatterns(values)
+            dsl_list_attribute(:InclusionPatterns, values)
+          end
+
+          #  @param [String|JSONable] value  Append value to the List
+          #    The List of values to use for InclusionPatterns
+          def InclusionPattern(value, fn_if: nil)
+            dsl_push_attribute(:InclusionPatterns, value, fn_if: fn_if)
+          end
+
+          # @param [Array<String>|JSONable>] values
+          #   The List of values to use for ExclusionPatterns
+          def ExclusionPatterns(values)
+            dsl_list_attribute(:ExclusionPatterns, values)
+          end
+
+          #  @param [String|JSONable] value  Append value to the List
+          #    The List of values to use for ExclusionPatterns
+          def ExclusionPattern(value, fn_if: nil)
+            dsl_push_attribute(:ExclusionPatterns, value, fn_if: fn_if)
+          end
+        end
+
+        # Property Definition ConfluenceSpaceConfiguration
+        class ConfluenceSpaceConfiguration < PropertyType
+          #   @param [Boolean|JSONable] value
+          #     The value to use for CrawlPersonalSpaces
+          def CrawlPersonalSpaces(value)
+            dsl_attribute(:CrawlPersonalSpaces, value)
+          end
+
+          #   @param [Boolean|JSONable] value
+          #     The value to use for CrawlArchivedSpaces
+          def CrawlArchivedSpaces(value)
+            dsl_attribute(:CrawlArchivedSpaces, value)
+          end
+
+          # @param [Array<String>|JSONable>] values
+          #   The List of values to use for IncludeSpaces
+          def IncludeSpaces(values)
+            dsl_list_attribute(:IncludeSpaces, values)
+          end
+
+          #  @param [String|JSONable] value  Append value to the List
+          #    The List of values to use for IncludeSpaces
+          def IncludeSpace(value, fn_if: nil)
+            dsl_push_attribute(:IncludeSpaces, value, fn_if: fn_if)
+          end
+
+          # @param [Array<String>|JSONable>] values
+          #   The List of values to use for ExcludeSpaces
+          def ExcludeSpaces(values)
+            dsl_list_attribute(:ExcludeSpaces, values)
+          end
+
+          #  @param [String|JSONable] value  Append value to the List
+          #    The List of values to use for ExcludeSpaces
+          def ExcludeSpace(value, fn_if: nil)
+            dsl_push_attribute(:ExcludeSpaces, value, fn_if: fn_if)
+          end
+
+          # @param [Array<ConfluenceSpaceToIndexFieldMapping>|JSONable>] values
+          #   The List of values to use for SpaceFieldMappings
+          def SpaceFieldMappings(values)
+            dsl_list_attribute(:SpaceFieldMappings, values)
+          end
+
+          #  @param [ConfluenceSpaceToIndexFieldMapping|JSONable] value  Append value to the List
+          #    The List of values to use for SpaceFieldMappings
+          # @@overload SpaceFieldMapping(&block)
+          # Append value to the List from block via instance eval of a new ConfluenceSpaceToIndexFieldMapping
+          def SpaceFieldMapping(value = nil, fn_if: nil, **value_hash, &block)
+            dsl_push_attribute(:SpaceFieldMappings, value, fn_if: fn_if, attr_class: ConfluenceSpaceToIndexFieldMapping, **value_hash, &block)
+          end
+        end
+
+        # Property Definition ConfluenceSpaceToIndexFieldMapping
+        class ConfluenceSpaceToIndexFieldMapping < PropertyType
+          #   @param [String|JSONable] value
+          #     The value to use for DataSourceFieldName
+          def DataSourceFieldName(value)
+            dsl_attribute(:DataSourceFieldName, value)
+          end
+
+          #   @param [String|JSONable] value
+          #     The value to use for DateFieldFormat
+          def DateFieldFormat(value)
+            dsl_attribute(:DateFieldFormat, value)
+          end
+
+          #   @param [String|JSONable] value
+          #     The value to use for IndexFieldName
+          def IndexFieldName(value)
+            dsl_attribute(:IndexFieldName, value)
+          end
+        end
+
+        # Property Definition ConfluencePageConfiguration
+        class ConfluencePageConfiguration < PropertyType
+          # @param [Array<ConfluencePageToIndexFieldMapping>|JSONable>] values
+          #   The List of values to use for PageFieldMappings
+          def PageFieldMappings(values)
+            dsl_list_attribute(:PageFieldMappings, values)
+          end
+
+          #  @param [ConfluencePageToIndexFieldMapping|JSONable] value  Append value to the List
+          #    The List of values to use for PageFieldMappings
+          # @@overload PageFieldMapping(&block)
+          # Append value to the List from block via instance eval of a new ConfluencePageToIndexFieldMapping
+          def PageFieldMapping(value = nil, fn_if: nil, **value_hash, &block)
+            dsl_push_attribute(:PageFieldMappings, value, fn_if: fn_if, attr_class: ConfluencePageToIndexFieldMapping, **value_hash, &block)
+          end
+        end
+
+        # Property Definition ConfluencePageToIndexFieldMapping
+        class ConfluencePageToIndexFieldMapping < PropertyType
+          #   @param [String|JSONable] value
+          #     The value to use for DataSourceFieldName
+          def DataSourceFieldName(value)
+            dsl_attribute(:DataSourceFieldName, value)
+          end
+
+          #   @param [String|JSONable] value
+          #     The value to use for DateFieldFormat
+          def DateFieldFormat(value)
+            dsl_attribute(:DateFieldFormat, value)
+          end
+
+          #   @param [String|JSONable] value
+          #     The value to use for IndexFieldName
+          def IndexFieldName(value)
+            dsl_attribute(:IndexFieldName, value)
+          end
+        end
+
+        # Property Definition ConfluenceBlogConfiguration
+        class ConfluenceBlogConfiguration < PropertyType
+          # @param [Array<ConfluenceBlogToIndexFieldMapping>|JSONable>] values
+          #   The List of values to use for BlogFieldMappings
+          def BlogFieldMappings(values)
+            dsl_list_attribute(:BlogFieldMappings, values)
+          end
+
+          #  @param [ConfluenceBlogToIndexFieldMapping|JSONable] value  Append value to the List
+          #    The List of values to use for BlogFieldMappings
+          # @@overload BlogFieldMapping(&block)
+          # Append value to the List from block via instance eval of a new ConfluenceBlogToIndexFieldMapping
+          def BlogFieldMapping(value = nil, fn_if: nil, **value_hash, &block)
+            dsl_push_attribute(:BlogFieldMappings, value, fn_if: fn_if, attr_class: ConfluenceBlogToIndexFieldMapping, **value_hash, &block)
+          end
+        end
+
+        # Property Definition ConfluenceBlogToIndexFieldMapping
+        class ConfluenceBlogToIndexFieldMapping < PropertyType
+          #   @param [String|JSONable] value
+          #     The value to use for DataSourceFieldName
+          def DataSourceFieldName(value)
+            dsl_attribute(:DataSourceFieldName, value)
+          end
+
+          #   @param [String|JSONable] value
+          #     The value to use for DateFieldFormat
+          def DateFieldFormat(value)
+            dsl_attribute(:DateFieldFormat, value)
+          end
+
+          #   @param [String|JSONable] value
+          #     The value to use for IndexFieldName
+          def IndexFieldName(value)
+            dsl_attribute(:IndexFieldName, value)
+          end
+        end
+
+        # Property Definition ConfluenceAttachmentConfiguration
+        class ConfluenceAttachmentConfiguration < PropertyType
+          #   @param [Boolean|JSONable] value
+          #     The value to use for CrawlAttachments
+          def CrawlAttachments(value)
+            dsl_attribute(:CrawlAttachments, value)
+          end
+
+          # @param [Array<ConfluenceAttachmentToIndexFieldMapping>|JSONable>] values
+          #   The List of values to use for AttachmentFieldMappings
+          def AttachmentFieldMappings(values)
+            dsl_list_attribute(:AttachmentFieldMappings, values)
+          end
+
+          #  @param [ConfluenceAttachmentToIndexFieldMapping|JSONable] value  Append value to the List
+          #    The List of values to use for AttachmentFieldMappings
+          # @@overload AttachmentFieldMapping(&block)
+          # Append value to the List from block via instance eval of a new ConfluenceAttachmentToIndexFieldMapping
+          def AttachmentFieldMapping(value = nil, fn_if: nil, **value_hash, &block)
+            dsl_push_attribute(:AttachmentFieldMappings, value, fn_if: fn_if, attr_class: ConfluenceAttachmentToIndexFieldMapping, **value_hash, &block)
+          end
+        end
+
+        # Property Definition ConfluenceAttachmentToIndexFieldMapping
+        class ConfluenceAttachmentToIndexFieldMapping < PropertyType
+          #   @param [String|JSONable] value
+          #     The value to use for DataSourceFieldName
+          def DataSourceFieldName(value)
+            dsl_attribute(:DataSourceFieldName, value)
+          end
+
+          #   @param [String|JSONable] value
+          #     The value to use for DateFieldFormat
+          def DateFieldFormat(value)
+            dsl_attribute(:DateFieldFormat, value)
+          end
+
+          #   @param [String|JSONable] value
+          #     The value to use for IndexFieldName
+          def IndexFieldName(value)
+            dsl_attribute(:IndexFieldName, value)
+          end
+        end
+
         # Property Definition DataSourceConfiguration
         class DataSourceConfiguration < PropertyType
           #   @param [S3DataSourceConfiguration|JSONable] value
@@ -967,6 +1270,14 @@ module CfnDsl
           #   Set :DatabaseConfiguration from block via instance eval of a new DatabaseConfiguration
           def DatabaseConfiguration(value = nil, **value_hash, &block)
             dsl_attribute(:DatabaseConfiguration, value, attr_class: DatabaseConfiguration, **value_hash, &block)
+          end
+
+          #   @param [ConfluenceConfiguration|JSONable] value
+          #     The value to use for ConfluenceConfiguration
+          # @@overload ConfluenceConfiguration(&block)
+          #   Set :ConfluenceConfiguration from block via instance eval of a new ConfluenceConfiguration
+          def ConfluenceConfiguration(value = nil, **value_hash, &block)
+            dsl_attribute(:ConfluenceConfiguration, value, attr_class: ConfluenceConfiguration, **value_hash, &block)
           end
         end
 

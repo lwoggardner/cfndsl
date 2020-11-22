@@ -167,6 +167,85 @@ module CfnDsl
           end
         end
 
+        # Property Definition JsonTokenTypeConfiguration
+        class JsonTokenTypeConfiguration < PropertyType
+          #   @param [String|JSONable] value
+          #     The value to use for UserNameAttributeField
+          def UserNameAttributeField(value)
+            dsl_attribute(:UserNameAttributeField, value)
+          end
+
+          #   @param [String|JSONable] value
+          #     The value to use for GroupAttributeField
+          def GroupAttributeField(value)
+            dsl_attribute(:GroupAttributeField, value)
+          end
+        end
+
+        # Property Definition JwtTokenTypeConfiguration
+        class JwtTokenTypeConfiguration < PropertyType
+          #   @param [String|JSONable] value
+          #     The value to use for KeyLocation
+          def KeyLocation(value)
+            dsl_attribute(:KeyLocation, value)
+          end
+
+          #   @param [String|JSONable] value
+          #     The value to use for URL
+          def URL(value)
+            dsl_attribute(:URL, value)
+          end
+
+          #   @param [String|JSONable] value
+          #     The value to use for SecretManagerArn
+          def SecretManagerArn(value)
+            dsl_attribute(:SecretManagerArn, value)
+          end
+
+          #   @param [String|JSONable] value
+          #     The value to use for UserNameAttributeField
+          def UserNameAttributeField(value)
+            dsl_attribute(:UserNameAttributeField, value)
+          end
+
+          #   @param [String|JSONable] value
+          #     The value to use for GroupAttributeField
+          def GroupAttributeField(value)
+            dsl_attribute(:GroupAttributeField, value)
+          end
+
+          #   @param [String|JSONable] value
+          #     The value to use for Issuer
+          def Issuer(value)
+            dsl_attribute(:Issuer, value)
+          end
+
+          #   @param [String|JSONable] value
+          #     The value to use for ClaimRegex
+          def ClaimRegex(value)
+            dsl_attribute(:ClaimRegex, value)
+          end
+        end
+
+        # Property Definition UserTokenConfiguration
+        class UserTokenConfiguration < PropertyType
+          #   @param [JwtTokenTypeConfiguration|JSONable] value
+          #     The value to use for JwtTokenTypeConfiguration
+          # @@overload JwtTokenTypeConfiguration(&block)
+          #   Set :JwtTokenTypeConfiguration from block via instance eval of a new JwtTokenTypeConfiguration
+          def JwtTokenTypeConfiguration(value = nil, **value_hash, &block)
+            dsl_attribute(:JwtTokenTypeConfiguration, value, attr_class: JwtTokenTypeConfiguration, **value_hash, &block)
+          end
+
+          #   @param [JsonTokenTypeConfiguration|JSONable] value
+          #     The value to use for JsonTokenTypeConfiguration
+          # @@overload JsonTokenTypeConfiguration(&block)
+          #   Set :JsonTokenTypeConfiguration from block via instance eval of a new JsonTokenTypeConfiguration
+          def JsonTokenTypeConfiguration(value = nil, **value_hash, &block)
+            dsl_attribute(:JsonTokenTypeConfiguration, value, attr_class: JsonTokenTypeConfiguration, **value_hash, &block)
+          end
+        end
+
         #   @param [String|JSONable] value
         #     The value to use for Id
         def Id(value)
@@ -245,6 +324,26 @@ module CfnDsl
         #   Set :CapacityUnits from block via instance eval of a new CapacityUnitsConfiguration
         def CapacityUnits(value = nil, **value_hash, &block)
           dsl_attribute(:CapacityUnits, value, attr_class: CapacityUnitsConfiguration, **value_hash, &block)
+        end
+
+        #   @param [String|JSONable] value
+        #     The value to use for UserContextPolicy
+        def UserContextPolicy(value)
+          dsl_attribute(:UserContextPolicy, value)
+        end
+
+        # @param [Array<UserTokenConfiguration>|JSONable>] values
+        #   The List of values to use for UserTokenConfigurations
+        def UserTokenConfigurations(values)
+          dsl_list_attribute(:UserTokenConfigurations, values)
+        end
+
+        #  @param [UserTokenConfiguration|JSONable] value  Append value to the List
+        #    The List of values to use for UserTokenConfigurations
+        # @@overload UserTokenConfiguration(&block)
+        # Append value to the List from block via instance eval of a new UserTokenConfiguration
+        def UserTokenConfiguration(value = nil, fn_if: nil, **value_hash, &block)
+          dsl_push_attribute(:UserTokenConfigurations, value, fn_if: fn_if, attr_class: UserTokenConfiguration, **value_hash, &block)
         end
       end
     end

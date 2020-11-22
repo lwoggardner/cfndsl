@@ -99,6 +99,20 @@ module CfnDsl
             dsl_attribute(:BackupPlanName, value)
           end
 
+          # @param [Array<AdvancedBackupSettingResourceType>|JSONable>] values
+          #   The List of values to use for AdvancedBackupSettings
+          def AdvancedBackupSettings(values)
+            dsl_list_attribute(:AdvancedBackupSettings, values)
+          end
+
+          #  @param [AdvancedBackupSettingResourceType|JSONable] value  Append value to the List
+          #    The List of values to use for AdvancedBackupSettings
+          # @@overload AdvancedBackupSetting(&block)
+          # Append value to the List from block via instance eval of a new AdvancedBackupSettingResourceType
+          def AdvancedBackupSetting(value = nil, fn_if: nil, **value_hash, &block)
+            dsl_push_attribute(:AdvancedBackupSettings, value, fn_if: fn_if, attr_class: AdvancedBackupSettingResourceType, **value_hash, &block)
+          end
+
           # @param [Array<BackupRuleResourceType>|JSONable>] values
           #   The List of values to use for BackupPlanRule
           def BackupPlanRules(values)
@@ -111,6 +125,21 @@ module CfnDsl
           # Append value to the List from block via instance eval of a new BackupRuleResourceType
           def BackupPlanRule(value = nil, fn_if: nil, **value_hash, &block)
             dsl_push_attribute(:BackupPlanRule, value, fn_if: fn_if, attr_class: BackupRuleResourceType, **value_hash, &block)
+          end
+        end
+
+        # Property Definition AdvancedBackupSettingResourceType
+        class AdvancedBackupSettingResourceType < PropertyType
+          #   @param [Object|JSONable] value
+          #     The value to use for BackupOptions
+          def BackupOptions(value)
+            dsl_attribute(:BackupOptions, value)
+          end
+
+          #   @param [String|JSONable] value
+          #     The value to use for ResourceType
+          def ResourceType(value)
+            dsl_attribute(:ResourceType, value)
           end
         end
 

@@ -97,16 +97,20 @@ module CfnDsl
 
         # Default Action WebACL will take against ingress traffic when there is no matching Rule.
         class DefaultAction < PropertyType
-          #   @param [Object|JSONable] value
-          #     Allow traffic towards application.
-          def Allow(value)
-            dsl_attribute(:Allow, value)
+          #   @param [AllowAction|JSONable] value
+          #     The value to use for Allow
+          # @@overload Allow(&block)
+          #   Set :Allow from block via instance eval of a new AllowAction
+          def Allow(value = nil, **value_hash, &block)
+            dsl_attribute(:Allow, value, attr_class: AllowAction, **value_hash, &block)
           end
 
-          #   @param [Object|JSONable] value
-          #     Block traffic towards application.
-          def Block(value)
-            dsl_attribute(:Block, value)
+          #   @param [BlockAction|JSONable] value
+          #     The value to use for Block
+          # @@overload Block(&block)
+          #   Set :Block from block via instance eval of a new BlockAction
+          def Block(value = nil, **value_hash, &block)
+            dsl_attribute(:Block, value, attr_class: BlockAction, **value_hash, &block)
           end
         end
 
@@ -490,23 +494,142 @@ module CfnDsl
 
         # Action taken when Rule matches its condition.
         class RuleAction < PropertyType
-          #   @param [Object|JSONable] value
-          #     Allow traffic towards application.
-          def Allow(value)
-            dsl_attribute(:Allow, value)
+          #   @param [AllowAction|JSONable] value
+          #     The value to use for Allow
+          # @@overload Allow(&block)
+          #   Set :Allow from block via instance eval of a new AllowAction
+          def Allow(value = nil, **value_hash, &block)
+            dsl_attribute(:Allow, value, attr_class: AllowAction, **value_hash, &block)
           end
 
-          #   @param [Object|JSONable] value
-          #     Block traffic towards application.
-          def Block(value)
-            dsl_attribute(:Block, value)
+          #   @param [BlockAction|JSONable] value
+          #     The value to use for Block
+          # @@overload Block(&block)
+          #   Set :Block from block via instance eval of a new BlockAction
+          def Block(value = nil, **value_hash, &block)
+            dsl_attribute(:Block, value, attr_class: BlockAction, **value_hash, &block)
           end
 
-          #   @param [Object|JSONable] value
-          #     Count traffic towards application.
-          def Count(value)
-            dsl_attribute(:Count, value)
+          #   @param [CountAction|JSONable] value
+          #     The value to use for Count
+          # @@overload Count(&block)
+          #   Set :Count from block via instance eval of a new CountAction
+          def Count(value = nil, **value_hash, &block)
+            dsl_attribute(:Count, value, attr_class: CountAction, **value_hash, &block)
           end
+        end
+
+        # Allow traffic towards application.
+        class AllowAction < PropertyType
+          #   @param [CustomRequestHandling|JSONable] value
+          #     The value to use for CustomRequestHandling
+          # @@overload CustomRequestHandling(&block)
+          #   Set :CustomRequestHandling from block via instance eval of a new CustomRequestHandling
+          def CustomRequestHandling(value = nil, **value_hash, &block)
+            dsl_attribute(:CustomRequestHandling, value, attr_class: CustomRequestHandling, **value_hash, &block)
+          end
+        end
+
+        # Allow traffic towards application.
+        class CountAction < PropertyType
+          #   @param [CustomRequestHandling|JSONable] value
+          #     The value to use for CustomRequestHandling
+          # @@overload CustomRequestHandling(&block)
+          #   Set :CustomRequestHandling from block via instance eval of a new CustomRequestHandling
+          def CustomRequestHandling(value = nil, **value_hash, &block)
+            dsl_attribute(:CustomRequestHandling, value, attr_class: CustomRequestHandling, **value_hash, &block)
+          end
+        end
+
+        # Block traffic towards application.
+        class BlockAction < PropertyType
+          #   @param [CustomResponse|JSONable] value
+          #     The value to use for CustomResponse
+          # @@overload CustomResponse(&block)
+          #   Set :CustomResponse from block via instance eval of a new CustomResponse
+          def CustomResponse(value = nil, **value_hash, &block)
+            dsl_attribute(:CustomResponse, value, attr_class: CustomResponse, **value_hash, &block)
+          end
+        end
+
+        # HTTP header.
+        class CustomHTTPHeader < PropertyType
+          #   @param [String|JSONable] value
+          #     The value to use for Name
+          def Name(value)
+            dsl_attribute(:Name, value)
+          end
+
+          #   @param [String|JSONable] value
+          #     The value to use for Value
+          def Value(value)
+            dsl_attribute(:Value, value)
+          end
+        end
+
+        # Custom request handling.
+        class CustomRequestHandling < PropertyType
+          # @param [Array<CustomHTTPHeader>|JSONable>] values
+          #   Collection of HTTP headers.
+          def InsertHeaders(values)
+            dsl_list_attribute(:InsertHeaders, values)
+          end
+
+          #  @param [CustomHTTPHeader|JSONable] value  Append value to the List
+          #    Collection of HTTP headers.
+          # @@overload InsertHeader(&block)
+          # Append value to the List from block via instance eval of a new CustomHTTPHeader
+          def InsertHeader(value = nil, fn_if: nil, **value_hash, &block)
+            dsl_push_attribute(:InsertHeaders, value, fn_if: fn_if, attr_class: CustomHTTPHeader, **value_hash, &block)
+          end
+        end
+
+        # Custom response body.
+        class CustomResponseBody < PropertyType
+          #   @param [String|JSONable] value
+          #     The value to use for ContentType
+          def ContentType(value)
+            dsl_attribute(:ContentType, value)
+          end
+
+          #   @param [String|JSONable] value
+          #     The value to use for Content
+          def Content(value)
+            dsl_attribute(:Content, value)
+          end
+        end
+
+        # Custom response.
+        class CustomResponse < PropertyType
+          #   @param [Integer|JSONable] value
+          #     The value to use for ResponseCode
+          def ResponseCode(value)
+            dsl_attribute(:ResponseCode, value)
+          end
+
+          #   @param [String|JSONable] value
+          #     Custom response body key.
+          def CustomResponseBodyKey(value)
+            dsl_attribute(:CustomResponseBodyKey, value)
+          end
+
+          # @param [Array<CustomHTTPHeader>|JSONable>] values
+          #   Collection of HTTP headers.
+          def ResponseHeaders(values)
+            dsl_list_attribute(:ResponseHeaders, values)
+          end
+
+          #  @param [CustomHTTPHeader|JSONable] value  Append value to the List
+          #    Collection of HTTP headers.
+          # @@overload ResponseHeader(&block)
+          # Append value to the List from block via instance eval of a new CustomHTTPHeader
+          def ResponseHeader(value = nil, fn_if: nil, **value_hash, &block)
+            dsl_push_attribute(:ResponseHeaders, value, fn_if: fn_if, attr_class: CustomHTTPHeader, **value_hash, &block)
+          end
+        end
+
+        # Custom response key and body map.
+        class CustomResponseBodies < PropertyType
         end
 
         # Property Definition RuleGroupReferenceStatement
@@ -1059,6 +1182,14 @@ module CfnDsl
         # Append value to the List from block via instance eval of a new Tag
         def Tag(value = nil, fn_if: nil, **value_hash, &block)
           dsl_push_attribute(:Tags, value, fn_if: fn_if, attr_class: Tag, **value_hash, &block)
+        end
+
+        #   @param [CustomResponseBodies|JSONable] value
+        #     The value to use for CustomResponseBodies
+        # @@overload CustomResponseBodies(&block)
+        #   Set :CustomResponseBodies from block via instance eval of a new CustomResponseBodies
+        def CustomResponseBodies(value = nil, **value_hash, &block)
+          dsl_attribute(:CustomResponseBodies, value, attr_class: CustomResponseBodies, **value_hash, &block)
         end
       end
     end

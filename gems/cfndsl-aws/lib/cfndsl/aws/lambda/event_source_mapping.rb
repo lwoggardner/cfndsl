@@ -33,6 +33,21 @@ module CfnDsl
           end
         end
 
+        # The configuration used by AWS Lambda to access event source
+        class SourceAccessConfiguration < PropertyType
+          #   @param [String|JSONable] value
+          #     The type of source access configuration.
+          def Type(value)
+            dsl_attribute(:Type, value)
+          end
+
+          #   @param [String|JSONable] value
+          #     The Amazon Resource Name (ARN) of the AWSSecretsManager resource.
+          def URI(value)
+            dsl_attribute(:URI, value)
+          end
+        end
+
         #   @param [String|JSONable] value
         #     Event Source Mapping Identifier UUID.
         def Id(value)
@@ -117,6 +132,44 @@ module CfnDsl
         #    (Kafka) A list of Kafka topics.
         def Topic(value, fn_if: nil)
           dsl_push_attribute(:Topics, value, fn_if: fn_if)
+        end
+
+        # @param [Array<String>|JSONable>] values
+        #   (ActiveMQ) A list of ActiveMQ queues.
+        def Queues(values)
+          dsl_list_attribute(:Queues, values)
+        end
+
+        #  @param [String|JSONable] value  Append value to the List
+        #    (ActiveMQ) A list of ActiveMQ queues.
+        def Queue(value, fn_if: nil)
+          dsl_push_attribute(:Queues, value, fn_if: fn_if)
+        end
+
+        # @param [Array<SourceAccessConfiguration>|JSONable>] values
+        #   A list of SourceAccessConfiguration.
+        def SourceAccessConfigurations(values)
+          dsl_list_attribute(:SourceAccessConfigurations, values)
+        end
+
+        #  @param [SourceAccessConfiguration|JSONable] value  Append value to the List
+        #    A list of SourceAccessConfiguration.
+        # @@overload SourceAccessConfiguration(&block)
+        # Append value to the List from block via instance eval of a new SourceAccessConfiguration
+        def SourceAccessConfiguration(value = nil, fn_if: nil, **value_hash, &block)
+          dsl_push_attribute(:SourceAccessConfigurations, value, fn_if: fn_if, attr_class: SourceAccessConfiguration, **value_hash, &block)
+        end
+
+        #   @param [Boolean|JSONable] value
+        #     (Streams) Allows an invoke to return a partial successful response for a batch of records.
+        def PartialBatchResponse(value)
+          dsl_attribute(:PartialBatchResponse, value)
+        end
+
+        #   @param [Integer|JSONable] value
+        #     (Streams) Tumbling window (non-overlapping time window) duration to perform aggregations.
+        def TumblingWindowInSeconds(value)
+          dsl_attribute(:TumblingWindowInSeconds, value)
         end
       end
     end

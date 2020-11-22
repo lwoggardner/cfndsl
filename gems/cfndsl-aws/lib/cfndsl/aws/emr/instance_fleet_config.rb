@@ -13,92 +13,24 @@ module CfnDsl
     module EMR
       # Resource Type definition for AWS::EMR::InstanceFleetConfig
       class InstanceFleetConfig < ResourceType
-        # Property Definition InstanceTypeConfig
-        class InstanceTypeConfig < PropertyType
-          #   @param [String|JSONable] value
-          #     The value to use for BidPrice
-          def BidPrice(value)
-            dsl_attribute(:BidPrice, value)
-          end
-
-          #   @param [Number|JSONable] value
-          #     The value to use for BidPriceAsPercentageOfOnDemandPrice
-          def BidPriceAsPercentageOfOnDemandPrice(value)
-            dsl_attribute(:BidPriceAsPercentageOfOnDemandPrice, value)
-          end
-
-          # @param [Array<Configuration>|JSONable>] values
-          #   The List of values to use for Configurations
-          def Configurations(values)
-            dsl_list_attribute(:Configurations, values)
-          end
-
-          #  @param [Configuration|JSONable] value  Append value to the List
-          #    The List of values to use for Configurations
-          # @@overload Configuration(&block)
-          # Append value to the List from block via instance eval of a new Configuration
-          def Configuration(value = nil, fn_if: nil, **value_hash, &block)
-            dsl_push_attribute(:Configurations, value, fn_if: fn_if, attr_class: Configuration, **value_hash, &block)
-          end
-
-          #   @param [EbsConfiguration|JSONable] value
-          #     The value to use for EbsConfiguration
-          # @@overload EbsConfiguration(&block)
-          #   Set :EbsConfiguration from block via instance eval of a new EbsConfiguration
-          def EbsConfiguration(value = nil, **value_hash, &block)
-            dsl_attribute(:EbsConfiguration, value, attr_class: EbsConfiguration, **value_hash, &block)
+        # Property Definition VolumeSpecification
+        class VolumeSpecification < PropertyType
+          #   @param [Integer|JSONable] value
+          #     The value to use for SizeInGB
+          def SizeInGB(value)
+            dsl_attribute(:SizeInGB, value)
           end
 
           #   @param [String|JSONable] value
-          #     The value to use for InstanceType
-          def InstanceType(value)
-            dsl_attribute(:InstanceType, value)
+          #     The value to use for VolumeType
+          def VolumeType(value)
+            dsl_attribute(:VolumeType, value)
           end
 
           #   @param [Integer|JSONable] value
-          #     The value to use for WeightedCapacity
-          def WeightedCapacity(value)
-            dsl_attribute(:WeightedCapacity, value)
-          end
-        end
-
-        # Property Definition InstanceFleetProvisioningSpecifications
-        class InstanceFleetProvisioningSpecifications < PropertyType
-          #   @param [SpotProvisioningSpecification|JSONable] value
-          #     The value to use for SpotSpecification
-          # @@overload SpotSpecification(&block)
-          #   Set :SpotSpecification from block via instance eval of a new SpotProvisioningSpecification
-          def SpotSpecification(value = nil, **value_hash, &block)
-            dsl_attribute(:SpotSpecification, value, attr_class: SpotProvisioningSpecification, **value_hash, &block)
-          end
-        end
-
-        # Property Definition Configuration
-        class Configuration < PropertyType
-          #   @param [String|JSONable] value
-          #     The value to use for Classification
-          def Classification(value)
-            dsl_attribute(:Classification, value)
-          end
-
-          #   @param [Object|JSONable] value
-          #     The value to use for ConfigurationProperties
-          def ConfigurationProperties(value)
-            dsl_attribute(:ConfigurationProperties, value)
-          end
-
-          # @param [Array<Configuration>|JSONable>] values
-          #   The List of values to use for Configurations
-          def Configurations(values)
-            dsl_list_attribute(:Configurations, values)
-          end
-
-          #  @param [Configuration|JSONable] value  Append value to the List
-          #    The List of values to use for Configurations
-          # @@overload Configuration(&block)
-          # Append value to the List from block via instance eval of a new Configuration
-          def Configuration(value = nil, fn_if: nil, **value_hash, &block)
-            dsl_push_attribute(:Configurations, value, fn_if: fn_if, attr_class: Configuration, **value_hash, &block)
+          #     The value to use for Iops
+          def Iops(value)
+            dsl_attribute(:Iops, value)
           end
         end
 
@@ -125,24 +57,60 @@ module CfnDsl
           end
         end
 
-        # Property Definition SpotProvisioningSpecification
-        class SpotProvisioningSpecification < PropertyType
-          #   @param [Integer|JSONable] value
-          #     The value to use for BlockDurationMinutes
-          def BlockDurationMinutes(value)
-            dsl_attribute(:BlockDurationMinutes, value)
+        # Property Definition Configuration
+        class Configuration < PropertyType
+          #   @param [Object|JSONable] value
+          #     The value to use for ConfigurationProperties
+          def ConfigurationProperties(value)
+            dsl_attribute(:ConfigurationProperties, value)
+          end
+
+          # @param [Array<Configuration>|JSONable>] values
+          #   The List of values to use for Configurations
+          def Configurations(values)
+            dsl_list_attribute(:Configurations, values)
+          end
+
+          #  @param [Configuration|JSONable] value  Append value to the List
+          #    The List of values to use for Configurations
+          # @@overload Configuration(&block)
+          # Append value to the List from block via instance eval of a new Configuration
+          def Configuration(value = nil, fn_if: nil, **value_hash, &block)
+            dsl_push_attribute(:Configurations, value, fn_if: fn_if, attr_class: Configuration, **value_hash, &block)
           end
 
           #   @param [String|JSONable] value
-          #     The value to use for TimeoutAction
-          def TimeoutAction(value)
-            dsl_attribute(:TimeoutAction, value)
+          #     The value to use for Classification
+          def Classification(value)
+            dsl_attribute(:Classification, value)
+          end
+        end
+
+        # Property Definition InstanceFleetProvisioningSpecifications
+        class InstanceFleetProvisioningSpecifications < PropertyType
+          #   @param [SpotProvisioningSpecification|JSONable] value
+          #     The value to use for SpotSpecification
+          # @@overload SpotSpecification(&block)
+          #   Set :SpotSpecification from block via instance eval of a new SpotProvisioningSpecification
+          def SpotSpecification(value = nil, **value_hash, &block)
+            dsl_attribute(:SpotSpecification, value, attr_class: SpotProvisioningSpecification, **value_hash, &block)
           end
 
-          #   @param [Integer|JSONable] value
-          #     The value to use for TimeoutDurationMinutes
-          def TimeoutDurationMinutes(value)
-            dsl_attribute(:TimeoutDurationMinutes, value)
+          #   @param [OnDemandProvisioningSpecification|JSONable] value
+          #     The value to use for OnDemandSpecification
+          # @@overload OnDemandSpecification(&block)
+          #   Set :OnDemandSpecification from block via instance eval of a new OnDemandProvisioningSpecification
+          def OnDemandSpecification(value = nil, **value_hash, &block)
+            dsl_attribute(:OnDemandSpecification, value, attr_class: OnDemandProvisioningSpecification, **value_hash, &block)
+          end
+        end
+
+        # Property Definition OnDemandProvisioningSpecification
+        class OnDemandProvisioningSpecification < PropertyType
+          #   @param [String|JSONable] value
+          #     The value to use for AllocationStrategy
+          def AllocationStrategy(value)
+            dsl_attribute(:AllocationStrategy, value)
           end
         end
 
@@ -163,31 +131,92 @@ module CfnDsl
           end
         end
 
-        # Property Definition VolumeSpecification
-        class VolumeSpecification < PropertyType
-          #   @param [Integer|JSONable] value
-          #     The value to use for Iops
-          def Iops(value)
-            dsl_attribute(:Iops, value)
+        # Property Definition InstanceTypeConfig
+        class InstanceTypeConfig < PropertyType
+          #   @param [String|JSONable] value
+          #     The value to use for BidPrice
+          def BidPrice(value)
+            dsl_attribute(:BidPrice, value)
           end
 
           #   @param [Integer|JSONable] value
-          #     The value to use for SizeInGB
-          def SizeInGB(value)
-            dsl_attribute(:SizeInGB, value)
+          #     The value to use for WeightedCapacity
+          def WeightedCapacity(value)
+            dsl_attribute(:WeightedCapacity, value)
+          end
+
+          #   @param [EbsConfiguration|JSONable] value
+          #     The value to use for EbsConfiguration
+          # @@overload EbsConfiguration(&block)
+          #   Set :EbsConfiguration from block via instance eval of a new EbsConfiguration
+          def EbsConfiguration(value = nil, **value_hash, &block)
+            dsl_attribute(:EbsConfiguration, value, attr_class: EbsConfiguration, **value_hash, &block)
+          end
+
+          #   @param [Number|JSONable] value
+          #     The value to use for BidPriceAsPercentageOfOnDemandPrice
+          def BidPriceAsPercentageOfOnDemandPrice(value)
+            dsl_attribute(:BidPriceAsPercentageOfOnDemandPrice, value)
+          end
+
+          # @param [Array<Configuration>|JSONable>] values
+          #   The List of values to use for Configurations
+          def Configurations(values)
+            dsl_list_attribute(:Configurations, values)
+          end
+
+          #  @param [Configuration|JSONable] value  Append value to the List
+          #    The List of values to use for Configurations
+          # @@overload Configuration(&block)
+          # Append value to the List from block via instance eval of a new Configuration
+          def Configuration(value = nil, fn_if: nil, **value_hash, &block)
+            dsl_push_attribute(:Configurations, value, fn_if: fn_if, attr_class: Configuration, **value_hash, &block)
           end
 
           #   @param [String|JSONable] value
-          #     The value to use for VolumeType
-          def VolumeType(value)
-            dsl_attribute(:VolumeType, value)
+          #     The value to use for InstanceType
+          def InstanceType(value)
+            dsl_attribute(:InstanceType, value)
+          end
+        end
+
+        # Property Definition SpotProvisioningSpecification
+        class SpotProvisioningSpecification < PropertyType
+          #   @param [String|JSONable] value
+          #     The value to use for AllocationStrategy
+          def AllocationStrategy(value)
+            dsl_attribute(:AllocationStrategy, value)
+          end
+
+          #   @param [Integer|JSONable] value
+          #     The value to use for TimeoutDurationMinutes
+          def TimeoutDurationMinutes(value)
+            dsl_attribute(:TimeoutDurationMinutes, value)
+          end
+
+          #   @param [String|JSONable] value
+          #     The value to use for TimeoutAction
+          def TimeoutAction(value)
+            dsl_attribute(:TimeoutAction, value)
+          end
+
+          #   @param [Integer|JSONable] value
+          #     The value to use for BlockDurationMinutes
+          def BlockDurationMinutes(value)
+            dsl_attribute(:BlockDurationMinutes, value)
           end
         end
 
         #   @param [String|JSONable] value
-        #     The value to use for Id
-        def Id(value)
-          dsl_attribute(:Id, value)
+        #     The value to use for InstanceFleetType
+        def InstanceFleetType(value)
+          dsl_attribute(:InstanceFleetType, value)
+        end
+
+        #   @param [Integer|JSONable] value
+        #     The value to use for TargetOnDemandCapacity
+        def TargetOnDemandCapacity(value)
+          dsl_attribute(:TargetOnDemandCapacity, value)
         end
 
         #   @param [String|JSONable] value
@@ -196,10 +225,24 @@ module CfnDsl
           dsl_attribute(:ClusterId, value)
         end
 
+        #   @param [Integer|JSONable] value
+        #     The value to use for TargetSpotCapacity
+        def TargetSpotCapacity(value)
+          dsl_attribute(:TargetSpotCapacity, value)
+        end
+
+        #   @param [InstanceFleetProvisioningSpecifications|JSONable] value
+        #     The value to use for LaunchSpecifications
+        # @@overload LaunchSpecifications(&block)
+        #   Set :LaunchSpecifications from block via instance eval of a new InstanceFleetProvisioningSpecifications
+        def LaunchSpecifications(value = nil, **value_hash, &block)
+          dsl_attribute(:LaunchSpecifications, value, attr_class: InstanceFleetProvisioningSpecifications, **value_hash, &block)
+        end
+
         #   @param [String|JSONable] value
-        #     The value to use for InstanceFleetType
-        def InstanceFleetType(value)
-          dsl_attribute(:InstanceFleetType, value)
+        #     The value to use for Id
+        def Id(value)
+          dsl_attribute(:Id, value)
         end
 
         # @param [Array<InstanceTypeConfig>|JSONable>] values
@@ -216,30 +259,10 @@ module CfnDsl
           dsl_push_attribute(:InstanceTypeConfigs, value, fn_if: fn_if, attr_class: InstanceTypeConfig, **value_hash, &block)
         end
 
-        #   @param [InstanceFleetProvisioningSpecifications|JSONable] value
-        #     The value to use for LaunchSpecifications
-        # @@overload LaunchSpecifications(&block)
-        #   Set :LaunchSpecifications from block via instance eval of a new InstanceFleetProvisioningSpecifications
-        def LaunchSpecifications(value = nil, **value_hash, &block)
-          dsl_attribute(:LaunchSpecifications, value, attr_class: InstanceFleetProvisioningSpecifications, **value_hash, &block)
-        end
-
         #   @param [String|JSONable] value
         #     The value to use for Name
         def Name(value)
           dsl_attribute(:Name, value)
-        end
-
-        #   @param [Integer|JSONable] value
-        #     The value to use for TargetOnDemandCapacity
-        def TargetOnDemandCapacity(value)
-          dsl_attribute(:TargetOnDemandCapacity, value)
-        end
-
-        #   @param [Integer|JSONable] value
-        #     The value to use for TargetSpotCapacity
-        def TargetSpotCapacity(value)
-          dsl_attribute(:TargetSpotCapacity, value)
         end
       end
     end

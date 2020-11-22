@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
+require 'cfndsl/aws/serverless'
 
 def read_json_fixture(filename)
   spec_dir = File.dirname(__dir__)
@@ -12,7 +13,6 @@ describe CfnDsl::CloudFormationTemplate do
   subject(:template) { described_class.new }
 
   it 'Serverless_Function' do
-    skip 'TODO: Provide schema for AWS::Serverless'
     template.Serverless_Function(:Test) do
       Handler 'fn.handler'
       Runtime 'python2.7'
@@ -35,7 +35,6 @@ describe CfnDsl::CloudFormationTemplate do
   end
 
   it 'Serverless_Api' do
-    skip 'TODO: Provide schema for AWS::Serverless'
     template.Serverless_Api(:Test) do
       StageName 'prod'
       DefinitionUri 'swagger.yml'

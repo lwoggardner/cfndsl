@@ -39,6 +39,12 @@ module CfnDsl
         end
 
         #   @param [String|JSONable] value
+        #     The name of the workgroup that contains the named query.
+        def WorkGroup(value)
+          dsl_attribute(:WorkGroup, value)
+        end
+
+        #   @param [String|JSONable] value
         #     The unique ID of the query.
         def NamedQueryId(value)
           dsl_attribute(:NamedQueryId, value)

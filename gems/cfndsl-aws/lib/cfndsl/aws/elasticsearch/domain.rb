@@ -37,6 +37,18 @@ module CfnDsl
           end
 
           #   @param [Boolean|JSONable] value
+          #     The value to use for WarmEnabled
+          def WarmEnabled(value)
+            dsl_attribute(:WarmEnabled, value)
+          end
+
+          #   @param [Integer|JSONable] value
+          #     The value to use for WarmCount
+          def WarmCount(value)
+            dsl_attribute(:WarmCount, value)
+          end
+
+          #   @param [Boolean|JSONable] value
           #     The value to use for DedicatedMasterEnabled
           def DedicatedMasterEnabled(value)
             dsl_attribute(:DedicatedMasterEnabled, value)
@@ -60,6 +72,12 @@ module CfnDsl
           #     The value to use for InstanceType
           def InstanceType(value)
             dsl_attribute(:InstanceType, value)
+          end
+
+          #   @param [String|JSONable] value
+          #     The value to use for WarmType
+          def WarmType(value)
+            dsl_attribute(:WarmType, value)
           end
 
           #   @param [Boolean|JSONable] value

@@ -2,11 +2,13 @@
 
 source 'https://rubygems.org'
 
-gem 'cfndsl', path: 'gems/cfndsl'
-gem 'cfndsl-aws', path: 'gems/cfndsl-aws'
-gem 'cfndsl-core', path: 'gems/cfndsl-core'
-gem 'cfndsl-generate', path: 'gems/cfndsl-generate'
-# gem 'cfndsl-aws-serverless', path: 'gems/cfndsl-aws-serverless'
+path 'gems' do
+  gem 'cfndsl-core'
+  gem 'cfndsl-generate'
+  gem 'cfndsl-aws'
+  gem 'cfndsl-aws-serverless'
+  gem 'cfndsl'
+end
 
 group :development, :test, optional: true do
   gem 'github_changelog_generator'

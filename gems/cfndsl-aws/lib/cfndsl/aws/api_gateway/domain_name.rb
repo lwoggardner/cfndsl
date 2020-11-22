@@ -29,6 +29,21 @@ module CfnDsl
           end
         end
 
+        # Property Definition MutualTlsAuthentication
+        class MutualTlsAuthentication < PropertyType
+          #   @param [String|JSONable] value
+          #     The value to use for TruststoreUri
+          def TruststoreUri(value)
+            dsl_attribute(:TruststoreUri, value)
+          end
+
+          #   @param [String|JSONable] value
+          #     The value to use for TruststoreVersion
+          def TruststoreVersion(value)
+            dsl_attribute(:TruststoreVersion, value)
+          end
+        end
+
         # Property Definition Tag
         class Tag < PropertyType
           #   @param [String|JSONable] value
@@ -68,6 +83,14 @@ module CfnDsl
         #   Set :EndpointConfiguration from block via instance eval of a new EndpointConfiguration
         def EndpointConfiguration(value = nil, **value_hash, &block)
           dsl_attribute(:EndpointConfiguration, value, attr_class: EndpointConfiguration, **value_hash, &block)
+        end
+
+        #   @param [MutualTlsAuthentication|JSONable] value
+        #     The value to use for MutualTlsAuthentication
+        # @@overload MutualTlsAuthentication(&block)
+        #   Set :MutualTlsAuthentication from block via instance eval of a new MutualTlsAuthentication
+        def MutualTlsAuthentication(value = nil, **value_hash, &block)
+          dsl_attribute(:MutualTlsAuthentication, value, attr_class: MutualTlsAuthentication, **value_hash, &block)
         end
 
         #   @param [String|JSONable] value

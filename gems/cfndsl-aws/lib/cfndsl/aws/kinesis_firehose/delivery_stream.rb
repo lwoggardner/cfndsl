@@ -13,6 +13,21 @@ module CfnDsl
     module KinesisFirehose
       # Resource Type definition for AWS::KinesisFirehose::DeliveryStream
       class DeliveryStream < ResourceType
+        # Property Definition DeliveryStreamEncryptionConfigurationInput
+        class DeliveryStreamEncryptionConfigurationInput < PropertyType
+          #   @param [String|JSONable] value
+          #     The value to use for KeyARN
+          def KeyARN(value)
+            dsl_attribute(:KeyARN, value)
+          end
+
+          #   @param [String|JSONable] value
+          #     The value to use for KeyType
+          def KeyType(value)
+            dsl_attribute(:KeyType, value)
+          end
+        end
+
         # Property Definition SplunkDestinationConfiguration
         class SplunkDestinationConfiguration < PropertyType
           #   @param [CloudWatchLoggingOptions|JSONable] value
@@ -1045,10 +1060,33 @@ module CfnDsl
           end
         end
 
+        # Property Definition Tag
+        class Tag < PropertyType
+          #   @param [String|JSONable] value
+          #     The value to use for Key
+          def Key(value)
+            dsl_attribute(:Key, value)
+          end
+
+          #   @param [String|JSONable] value
+          #     The value to use for Value
+          def Value(value)
+            dsl_attribute(:Value, value)
+          end
+        end
+
         #   @param [String|JSONable] value
         #     The value to use for Arn
         def Arn(value)
           dsl_attribute(:Arn, value)
+        end
+
+        #   @param [DeliveryStreamEncryptionConfigurationInput|JSONable] value
+        #     The value to use for DeliveryStreamEncryptionConfigurationInput
+        # @@overload DeliveryStreamEncryptionConfigurationInput(&block)
+        #   Set :DeliveryStreamEncryptionConfigurationInput from block via instance eval of a new DeliveryStreamEncryptionConfigurationInput
+        def DeliveryStreamEncryptionConfigurationInput(value = nil, **value_hash, &block)
+          dsl_attribute(:DeliveryStreamEncryptionConfigurationInput, value, attr_class: DeliveryStreamEncryptionConfigurationInput, **value_hash, &block)
         end
 
         #   @param [String|JSONable] value
@@ -1117,6 +1155,20 @@ module CfnDsl
         #   Set :HttpEndpointDestinationConfiguration from block via instance eval of a new HttpEndpointDestinationConfiguration
         def HttpEndpointDestinationConfiguration(value = nil, **value_hash, &block)
           dsl_attribute(:HttpEndpointDestinationConfiguration, value, attr_class: HttpEndpointDestinationConfiguration, **value_hash, &block)
+        end
+
+        # @param [Array<Tag>|JSONable>] values
+        #   The List of values to use for Tags
+        def Tags(values)
+          dsl_list_attribute(:Tags, values)
+        end
+
+        #  @param [Tag|JSONable] value  Append value to the List
+        #    The List of values to use for Tags
+        # @@overload Tag(&block)
+        # Append value to the List from block via instance eval of a new Tag
+        def Tag(value = nil, fn_if: nil, **value_hash, &block)
+          dsl_push_attribute(:Tags, value, fn_if: fn_if, attr_class: Tag, **value_hash, &block)
         end
       end
     end

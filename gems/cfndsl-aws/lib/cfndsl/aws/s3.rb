@@ -8,3 +8,4 @@
 require_relative 's3/access_point'
 require_relative 's3/bucket'
 require_relative 's3/bucket_policy'
+require_relative 's3/storage_lens'

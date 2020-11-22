@@ -35,6 +35,12 @@ module CfnDsl
           dsl_attribute(:Arn, value)
         end
 
+        #   @param [String|JSONable] value
+        #     The name of the image.
+        def Name(value)
+          dsl_attribute(:Name, value)
+        end
+
         #   @param [ImageTestsConfiguration|JSONable] value
         #     The image tests configuration used when creating this image.
         # @@overload ImageTestsConfiguration(&block)

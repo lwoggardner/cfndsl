@@ -31,6 +31,20 @@ module CfnDsl
           end
 
           #   @param [String|JSONable] value
+          #     The value to use for CatalogId
+          def CatalogId(value)
+            dsl_attribute(:CatalogId, value)
+          end
+
+          #   @param [TableWildcard|JSONable] value
+          #     The value to use for TableWildcard
+          # @@overload TableWildcard(&block)
+          #   Set :TableWildcard from block via instance eval of a new TableWildcard
+          def TableWildcard(value = nil, **value_hash, &block)
+            dsl_attribute(:TableWildcard, value, attr_class: TableWildcard, **value_hash, &block)
+          end
+
+          #   @param [String|JSONable] value
           #     The value to use for Name
           def Name(value)
             dsl_attribute(:Name, value)
@@ -75,6 +89,12 @@ module CfnDsl
         # Property Definition DatabaseResource
         class DatabaseResource < PropertyType
           #   @param [String|JSONable] value
+          #     The value to use for CatalogId
+          def CatalogId(value)
+            dsl_attribute(:CatalogId, value)
+          end
+
+          #   @param [String|JSONable] value
           #     The value to use for Name
           def Name(value)
             dsl_attribute(:Name, value)
@@ -88,6 +108,16 @@ module CfnDsl
           def S3Resource(value)
             dsl_attribute(:S3Resource, value)
           end
+
+          #   @param [String|JSONable] value
+          #     The value to use for CatalogId
+          def CatalogId(value)
+            dsl_attribute(:CatalogId, value)
+          end
+        end
+
+        # Property Definition TableWildcard
+        class TableWildcard < PropertyType
         end
 
         # Property Definition TableWithColumnsResource
@@ -108,6 +138,12 @@ module CfnDsl
           #    The List of values to use for ColumnNames
           def ColumnName(value, fn_if: nil)
             dsl_push_attribute(:ColumnNames, value, fn_if: fn_if)
+          end
+
+          #   @param [String|JSONable] value
+          #     The value to use for CatalogId
+          def CatalogId(value)
+            dsl_attribute(:CatalogId, value)
           end
 
           #   @param [String|JSONable] value

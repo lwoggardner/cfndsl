@@ -2,7 +2,6 @@
 
 require_relative 'registry_specification'
 require_relative 'mustache'
-require 'digest/xxhash'
 require 'open-uri'
 require 'zip'
 
@@ -20,7 +19,6 @@ end
 module CfnDsl
   # Generate classes from json registry specification
   module Generate
-    Digest = Digest::XXHash # a fast non-cryptographic hash
 
     Resource = Struct.new(:type, :organization, :service, :resource, :file)
 

@@ -28,18 +28,6 @@ module CfnDsl
           end
         end
 
-        #   @param [String|JSONable] value
-        #     The value to use for Id
-        def Id(value)
-          dsl_attribute(:Id, value)
-        end
-
-        #   @param [String|JSONable] value
-        #     The value to use for Name
-        def Name(value)
-          dsl_attribute(:Name, value)
-        end
-
         # @param [Array<TagsEntry>|JSONable>] values
         #   The List of values to use for Tags
         def Tags(values)
@@ -52,6 +40,18 @@ module CfnDsl
         # Append value to the List from block via instance eval of a new TagsEntry
         def Tag(value = nil, fn_if: nil, **value_hash, &block)
           dsl_push_attribute(:Tags, value, fn_if: fn_if, attr_class: TagsEntry, **value_hash, &block)
+        end
+
+        #   @param [String|JSONable] value
+        #     The value to use for Name
+        def Name(value)
+          dsl_attribute(:Name, value)
+        end
+
+        #   @param [String|JSONable] value
+        #     The value to use for Id
+        def Id(value)
+          dsl_attribute(:Id, value)
         end
       end
     end

@@ -107,6 +107,12 @@ module CfnDsl
           end
 
           #   @param [Boolean|JSONable] value
+          #     The value to use for EnableAcceptEncodingBrotli
+          def EnableAcceptEncodingBrotli(value)
+            dsl_attribute(:EnableAcceptEncodingBrotli, value)
+          end
+
+          #   @param [Boolean|JSONable] value
           #     The value to use for EnableAcceptEncodingGzip
           def EnableAcceptEncodingGzip(value)
             dsl_attribute(:EnableAcceptEncodingGzip, value)

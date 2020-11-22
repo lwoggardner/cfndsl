@@ -8,5 +8,6 @@
 require_relative 'cloud_formation/custom_resource'
 require_relative 'cloud_formation/macro'
 require_relative 'cloud_formation/stack'
+require_relative 'cloud_formation/stack_set'
 require_relative 'cloud_formation/wait_condition'
 require_relative 'cloud_formation/wait_condition_handle'
